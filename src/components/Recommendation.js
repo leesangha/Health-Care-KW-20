@@ -19,7 +19,7 @@ function Food({foodImageList, clickEvent}) {
   const [inputs,setInputs] = useState({
     user_id:'1',
     food_id:'1'
-  })
+  });
 
   const onClick = () =>{
     
