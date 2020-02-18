@@ -1,0 +1,38 @@
+.navigation-bar {
+  height: 50px;
+  background-color: white;
+  display: flex;
+  font-size: 20px;
+
+  .left-side {
+    display: flex;
+    align-items: center;
+    width: 50%;
+
+    img {
+      height: 30px;
+      margin-left: 10px;
+    }
+
+    .menu-elements {
+      margin-left: 30px;
+
+      a {
+        margin-right: 20px;
+        text-decoration: none;
+        color: black;
+      }
+    }
+  }
+
+  .right-side {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    justify-content: flex-end;
+
+    svg {
+      margin-right: 10px;
+    }
+  }
+}
