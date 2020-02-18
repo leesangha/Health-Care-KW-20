@@ -17,6 +17,7 @@
     background-color: white;
     grid-area: recommendation;
     overflow-x: auto;
+    overflow-y: hidden;
 
     span {
       $font-position: 30px;
