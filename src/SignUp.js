@@ -20,7 +20,7 @@ function SignUp(){
 
     const isSuccess = () =>{
         //중복 확인
-        console.log(inputs);
+
         //성공
 
 
@@ -34,9 +34,6 @@ function SignUp(){
     }
 
     const onClick = ()=>{
-
-        // const reqQuery = "Insert into Member"+ "\n Values "+"("
-        // + address + password + name + ")" ;
         fetch('/addUser',{method: 'POST',body:JSON.stringify(inputs),
         headers:{
             "Content-Type":"application/json",
@@ -44,10 +41,10 @@ function SignUp(){
         }})
         .then(res => res.json())
         .then(data => {
-            console.log(data);
-         
+            console.log(data.text);
+            if(data.text != 'success')
+            isSuccess();
         });
-        isSuccess();
        //DB 연결 send -> Insert 
       // isSuccess();
     }
