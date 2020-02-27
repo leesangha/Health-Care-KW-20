@@ -45,12 +45,27 @@ app.post("/addUser",(req,res,next) =>{
             //Already User Inserted
             res.send({text: 'Same User exists'});
         }
-       
         }
     }
 )
-}
-)
+   
+});
+
+app.post("/process/login",(req,res,next) => {
+    var id = req.body.id;
+    var password = req.body.password;
+    db.query("Select * from Member where Id = \'" + id + '\'' + 'AND Password = \'' + password + '\'',
+    (err,rows) =>{
+        if(rows.recordset[0] ===undefined || err)
+        res.send({err:'error'});
+        else{
+        console.log(rows.recordset[0]);
+        res.send(rows.recordset[0]);
+        }
+       
+    })
+   
+})
 
 app.post("/hate",(req,res,next) =>{
 
