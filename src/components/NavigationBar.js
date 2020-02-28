@@ -14,6 +14,8 @@ function NavigationBar() {
         <div className="menu-elements">
           <Link to="/register">등록</Link>
           <Link to="/statistics">통계</Link>
+          <Link to = "/login">Login</Link>
+          <Link to = "/SignUp">회원가입 </Link>
         </div>
       </div>
       <div className="right-side">
