@@ -1,13 +1,10 @@
 import React,{useState,useCallback} from 'react';
-
-function SignUp(){
+function Login(){
     const [inputs,setInputs] = useState({
-        name:'',
-        address:'',
-        password:'',
-        age: '',
+        id:'',
+        password:''
     });
-    const {name, address,password,age} = inputs;
+    const {id, password} = inputs;
 
     const onChange = useCallback(e=>{
         const {name,value} = e.target;
@@ -20,44 +17,44 @@ function SignUp(){
 
     const isSuccess = () =>{
         setInputs({
-        name:'',
-        address:'',
-        password:'',
-        age: '',
+        id:'',
+        password:''
         })
     }
 
     const onClick = ()=>{
-        fetch('/addUser',{method: 'POST',body:JSON.stringify(inputs),
+        fetch('/process/login',{method: 'POST',body:JSON.stringify(inputs),
         headers:{
             "Content-Type":"application/json",
             "Accept":"application/json"
         }})
         .then(res => res.json())
         .then(data => {
-            console.log(data.text);
-            if(data.text !== 'success')
+            //Login Fail
+            if(data.err ==='error')
+               {
+                console.log('login fail');
+               }
+            else{
+            localStorage.setItem('info',JSON.stringify(data));
+            console.log(localStorage.getItem('info'));
             isSuccess();
+            }
+            
         });
     }
     return (
         <div>
-            <p>회원가입 페이지 입니다.</p>
+            <p>로그인 페이지 입니다.</p>
             <p>
                 서식 
                 <ul>
-                    <li>이름</li>
-                    <input name = "name"
-                    placeholder = "name"
-                    onChange = {onChange}
-                    value = {name}
-                    />
-                    <br/>
+                   
                     <li>ID</li>
-                    <input name = "address"
-                    placeholder = "address"
+                    <input name = "id"
+                    placeholder = "id"
                     onChange = {onChange}
-                    value = {address}
+                    value = {id}
                     />
                     <br/>
                     <li>PASSWORD</li>
@@ -67,16 +64,10 @@ function SignUp(){
                     value = {password}
                     />
                     <br/>
-                    <li>AGE</li>
-                    <input name = "age"
-                    placeholder = "age"
-                    onChange = {onChange}
-                    value = {age}
-                    />
                 </ul>
             </p>
             <button onClick = {onClick} > 제출</button>
         </div>
     )
 }
-export default SignUp;
+export default Login;
