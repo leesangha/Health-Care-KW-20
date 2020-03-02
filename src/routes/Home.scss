@@ -1,4 +1,4 @@
-.page {
+section {
   height: calc(100% - 50px);
   background-color: black;
   display: grid;
@@ -7,25 +7,4 @@
   grid-template-areas:
           "statistic"
           "recommendation";
-
-  .date-checker {
-    grid-area: statistic;
-  }
-
-  .recommendation {
-    display: flex;
-    background-color: white;
-    grid-area: recommendation;
-    overflow-x: auto;
-    overflow-y: hidden;
-
-    h1 {
-      $font-position: 30px;
-      font-weight: normal;
-      position: absolute;
-      margin: $font-position 0 0 $font-position;
-      font-size: 24px;
-    }
-  }
 }
-
