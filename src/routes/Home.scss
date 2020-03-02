@@ -19,8 +19,9 @@
     overflow-x: auto;
     overflow-y: hidden;
 
-    span {
+    h1 {
       $font-position: 30px;
+      font-weight: normal;
       position: absolute;
       margin: $font-position 0 0 $font-position;
       font-size: 24px;
