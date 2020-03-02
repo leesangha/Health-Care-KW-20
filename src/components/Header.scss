@@ -1,4 +1,4 @@
-.navigation-bar {
+header {
   height: 50px;
   background-color: white;
   display: flex;
@@ -8,21 +8,18 @@
     display: flex;
     align-items: center;
     width: 50%;
+    text-decoration: none;
 
     img {
       height: 30px;
       margin-left: 10px;
+      margin-right: 30px;
     }
 
-    .menu-elements {
-      display: flex;
-      align-items: center;
-      margin-left: 30px;
-      a {
-        margin-right: 20px;
-        text-decoration: none;
-        color: black;
-      }
+    a {
+      margin-right: 30px;
+      color: black;
+      text-decoration: none;
     }
   }
 
