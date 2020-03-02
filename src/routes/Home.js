@@ -19,14 +19,14 @@ function Home() {
   const event = () => console.log("clicked..");
 
   return (
-    <div className="page">
-      <div className="date-checker">
-      </div>
-      <div className="recommendation">
-        <span>이런 음식 어때요?</span>
+    <section className="page">
+      <article className="date-checker">
+      </article>
+      <article className="recommendation">
+        <h1>이런 음식 어때요?</h1>
         <Food foodImageList={getFoodImage()} clickEvent={event} />
-      </div>
-    </div>
+      </article>
+    </section>
   );
 }
 

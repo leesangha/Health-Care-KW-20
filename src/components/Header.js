@@ -1,26 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./NavigationBar.scss"
+import "./Header.scss"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSmile} from "@fortawesome/free-regular-svg-icons";
 
-function NavigationBar() {
+function Header() {
   return (
-    <div className="navigation-bar">
-      <div className="left-side">
+    <header>
+      <nav className="left-side">
         <Link to="/">
           <img src="../images/maet-logo.png" alt="logo" />
         </Link>
-        <div className="menu-elements">
-          <Link to="/register">등록</Link>
-          <Link to="/statistics">통계</Link>
-        </div>
-      </div>
+        <Link to="/register">등록</Link>
+        <Link to="/statistics">통계</Link>
+      </nav>
       <div className="right-side">
         <FontAwesomeIcon icon={faSmile} />
       </div>
-    </div>
+    </header>
   );
 }
 
-export default NavigationBar;
+export default Header;
