@@ -15,6 +15,7 @@ function App() {
         <Route path = "/SignUp" component ={SignUp}/>
         <Route path = "/Login" component = {Login}/>
       </Switch>
+      <AddButton/>
     </div>
   );
 }
