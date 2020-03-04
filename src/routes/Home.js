@@ -1,6 +1,6 @@
 import React from "react";
 import "./Home.scss"
-import Food from "../components/Recommendation";
+import Recommendation from "../components/Recommendation";
 
 // 추천 모델을 통해서 추천될 음식들의 리스트를 가져옴. - sorting된 음식 번호가 담긴 배열.
 // 서버에 저장되어 있는 음식 사진을 가져옴.
@@ -16,17 +16,12 @@ function getFoodImage(foodArray) {
 }
 
 function Home() {
-  const event = () => console.log("clicked..");
-
   return (
-    <div className="page">
-      <div className="date-checker">
-      </div>
-      <div className="recommendation">
-        <span>이런 음식 어때요?</span>
-        <Food foodImageList={getFoodImage()} clickEvent={event} />
-      </div>
-    </div>
+    <section>
+      <article className="date-checker">
+      </article>
+      <Recommendation foodImageList={getFoodImage()} />
+    </section>
   );
 }
 
