@@ -1,6 +1,7 @@
 import React from "react";
 import "./Home.scss"
 import Recommendation from "../components/Recommendation";
+import DateAnalytic from "../components/DateAnalytic";
 
 // 추천 모델을 통해서 추천될 음식들의 리스트를 가져옴. - sorting된 음식 번호가 담긴 배열.
 // 서버에 저장되어 있는 음식 사진을 가져옴.
@@ -18,8 +19,7 @@ function getFoodImage(foodArray) {
 function Home() {
   return (
     <section>
-      <article className="date-checker">
-      </article>
+      <DateAnalytic />
       <Recommendation foodImageList={getFoodImage()} />
     </section>
   );
