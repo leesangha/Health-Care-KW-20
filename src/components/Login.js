@@ -1,10 +1,13 @@
 import React,{useState,useCallback} from 'react';
-function Login(){
+function Login({history}){
+
+
     const [inputs,setInputs] = useState({
         id:'',
         password:''
     });
     const {id, password} = inputs;
+    
 
     const onChange = useCallback(e=>{
         const {name,value} = e.target;
@@ -34,11 +37,13 @@ function Login(){
             if(data.err ==='error')
                {
                 console.log('login fail');
+                isSuccess();
                }
             else{
             localStorage.setItem('info',JSON.stringify(data));
             console.log(localStorage.getItem('info'));
-            isSuccess();
+            //Home
+            history.push('/');
             }
             
         });
@@ -46,8 +51,9 @@ function Login(){
     return (
         <div>
             <p>로그인 페이지 입니다.</p>
+            <br/>
             <p>
-                서식 
+                
                 <ul>
                    
                     <li>ID</li>

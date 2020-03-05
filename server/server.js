@@ -10,9 +10,6 @@ const PORT = process.env.PORT || 4000;
 
 app.use(express.static(path.join(__dirname,'..','public/')));
 
-app.get("/api/getUsername",(req,res,next) =>{
-    res.send({username: os.userInfo().username})
-});
 
 app.post("/addUser",(req,res,next) =>{
     var address = req.body.address 
