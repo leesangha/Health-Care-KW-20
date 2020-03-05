@@ -3,87 +3,88 @@
   position: relative;
   align-items: center;
   overflow: hidden;
+
   h2 {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 30px;
+    left: 30px;
   }
 
-  ul {
+  .nutrition {
     padding-left: 20px;
+    width: 15%;
+    list-style-type: none;
+
     li {
-      font-size: 20px;
       display: flex;
       align-items: center;
-      margin: 20px 0 20px 0;
-      dfn {
-        width: 150px;
-      }
-      div {
-        margin-right: 10px;
-      }
+      font-size: 20px;
+      height: 40px;
     }
   }
 
-  .recommended-amount {
-    position: absolute;
-    right: 25%;
-    height: 90%;
-    border-right: 2px dashed lightgray;
-    box-sizing: border-box;
+  .nutrition-graph {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 85%;
+    height: 100%;
+    position: relative;
+
+    li {
+      height: 40px;
+      display: flex;
+      align-items: center;
+
+      div {
+        height: 25px;
+        margin-right: 10px;
+      }
+    }
+
+    .recommended-amount {
+      position: absolute;
+      right: 25%;
+      height: 90%;
+      border-right: 2px dashed lightgray;
+      box-sizing: border-box;
+    }
   }
 }
 
-.a {
+#calorie {
   background-color: red;
-  width: 100vw;
-  height: 10px;
 }
 
-.b {
+#carbohydrate {
   background-color: orange;
-  width: calc(100vw - 240px);
-  height: 10px;
 }
 
-.c {
+#protein {
   background-color: yellow;
-  width: 200px;
-  height: 10px;
 }
 
-.d {
- background-color: green;
-  width: 200px;
-  height: 10px;
+#fat {
+  background-color: green;
 }
 
-.e {
- background-color: blue;
-  width: 200px;
-  height: 10px;
+#sugar {
+  background-color: blue;
 }
 
-.f {
- background-color: darkblue;
-  width: 200px;
-  height: 10px;
+#salt {
+  background-color: darkblue;
 }
 
-.g {
- background-color: purple;
-  width: 200px;
-  height: 10px;
+#cholesterol {
+  background-color: purple;
 }
 
-.h {
- background-color: gray;
-  width: 200px;
-  height: 10px;
+#saturated-fat {
+  background-color: gray;
 }
 
-.i {
- background-color: black;
-  width: 200px;
-  height: 10px;
+#trans-fat {
+  background-color: black;
 }
