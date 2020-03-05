@@ -1,0 +1,89 @@
+.analytic {
+  display: flex;
+  position: relative;
+  align-items: center;
+  overflow: hidden;
+  h2 {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+
+  ul {
+    padding-left: 20px;
+    li {
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      margin: 20px 0 20px 0;
+      dfn {
+        width: 150px;
+      }
+      div {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .recommended-amount {
+    position: absolute;
+    right: 25%;
+    height: 90%;
+    border-right: 2px dashed lightgray;
+    box-sizing: border-box;
+  }
+}
+
+.a {
+  background-color: red;
+  width: 100vw;
+  height: 10px;
+}
+
+.b {
+  background-color: orange;
+  width: calc(100vw - 240px);
+  height: 10px;
+}
+
+.c {
+  background-color: yellow;
+  width: 200px;
+  height: 10px;
+}
+
+.d {
+ background-color: green;
+  width: 200px;
+  height: 10px;
+}
+
+.e {
+ background-color: blue;
+  width: 200px;
+  height: 10px;
+}
+
+.f {
+ background-color: darkblue;
+  width: 200px;
+  height: 10px;
+}
+
+.g {
+ background-color: purple;
+  width: 200px;
+  height: 10px;
+}
+
+.h {
+ background-color: gray;
+  width: 200px;
+  height: 10px;
+}
+
+.i {
+ background-color: black;
+  width: 200px;
+  height: 10px;
+}

@@ -1,10 +1,9 @@
 section {
   height: calc(100% - 50px);
-  background-color: black;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1.2fr 1fr;
   grid-template-areas:
-          "statistic"
+          "date-analytic"
           "recommendation";
 }

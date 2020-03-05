@@ -1,21 +1,21 @@
 import React from 'react'
-import './AddButton.css'
+import './AddButton.scss'
 
-
+// href 추가되야함.
 function AddButton() {
   return (
     <div className="add-button">
-      <a href="#" className="float" id="menu-share">
+      <a className="float" id="menu-share">
         <i className="fa fa-share my-float"/>
       </a>
       <ul>
         <li>
-          <a href="#">
+          <a>
             <i className="fa fa-camera my-float"/>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a>
             <i className="fas fa-utensils my-float"/>
           </a>
         </li>
