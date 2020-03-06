@@ -1,4 +1,4 @@
-import React ,{useEffect} from 'react';
+import React, { useState,useEffect } from 'react';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import './App.css';
@@ -23,17 +23,27 @@ function App() {
 
     //선호도 검사 
   },[])
+  
+  const [isLogin, setLog] = useState(false);
 
   return (
-    <div>
-      <Header/>
+    <>
+      {isLogin ? (
+        <>
+          <Header />
+          <AddButton/>
+        </>
+      ) : null}
       <Switch>
-        <Route path = "/" component = {Home} exact/>
-        <Route path = "/SignUp" component ={SignUp}/>
-        <Route path = "/Login" component = {Login}/>
+        <Route exact path="/" render={
+          (props) => <Home {...props} isLogin={isLogin} />
+        } />
+        <Route path="/SignUp" component={SignUp}/>
+        <Route path="/Login" render={
+          (props) => <Login {...props} setLog={setLog} />
+        } />
       </Switch>
-      <AddButton/>
-    </div>
+    </>
   );
 }
 

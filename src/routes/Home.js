@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./Home.scss"
 import Recommendation from "../components/Recommendation";
 import DateAnalytic from "../components/DateAnalytic";
@@ -16,7 +16,13 @@ function getFoodImage(foodArray) {
   return list;
 }
 
-function Home() {
+function Home({isLogin, history}) {
+  useEffect(() => {
+    if(!isLogin) {
+      history.push('/Login');
+    }
+  });
+
   return (
     <section>
       <DateAnalytic />
