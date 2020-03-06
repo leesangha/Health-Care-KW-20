@@ -19,7 +19,7 @@
       display: flex;
       align-items: center;
       font-size: 20px;
-      height: 40px;
+      height: 60px;
     }
   }
 
@@ -33,13 +33,14 @@
     position: relative;
 
     li {
-      height: 40px;
+      height: 60px;
       display: flex;
       align-items: center;
 
       div {
-        height: 25px;
+        height: 30px;
         margin-right: 10px;
+        border-radius: 20px;
       }
     }
 
@@ -53,38 +54,20 @@
   }
 }
 
-#calorie {
-  background-color: red;
-}
+#calorie { background-color:  #142459}
 
-#carbohydrate {
-  background-color: orange;
-}
+#carbohydrate { background-color: #176BAD  }
 
-#protein {
-  background-color: yellow;
-}
+#protein { background-color: #19AADE  }
 
-#fat {
-  background-color: green;
-}
+#fat { background-color: #1AC9E6 }
 
-#sugar {
-  background-color: blue;
-}
+#sugar { background-color: #64D1D3  }
 
-#salt {
-  background-color: darkblue;
-}
+#salt { background-color: #6CE1BE  }
 
-#cholesterol {
-  background-color: purple;
-}
+#cholesterol { background-color: #97F2D2 }
 
-#saturated-fat {
-  background-color: gray;
-}
+#saturated-fat { background-color: #C4ECE3 }
 
-#trans-fat {
-  background-color: black;
-}
+#trans-fat { background-color: #BCD9CB }

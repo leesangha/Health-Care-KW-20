@@ -34,7 +34,7 @@ function DateAnalytic() {
 
   return (
     <article className="analytic">
-      <h2>일일 통계</h2>
+      {/*<h2>일일 섭취량</h2>*/}
 
       <ul className="nutrition">
         <li>열량</li>
