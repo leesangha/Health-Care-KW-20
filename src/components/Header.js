@@ -5,6 +5,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSmile} from "@fortawesome/free-regular-svg-icons";
 
 function Header() {
+  const SignIn = 'Sign in';
+  const SignUp = 'Sign up';
   return (
     <header>
       <nav className="left-side">
@@ -15,6 +17,8 @@ function Header() {
         <Link to="/statistics">통계</Link>
       </nav>
       <div className="right-side">
+      <Link to="/login">{SignIn}</Link>
+      <Link to="/Signup">{SignUp}</Link>
         <FontAwesomeIcon icon={faSmile} />
       </div>
     </header>

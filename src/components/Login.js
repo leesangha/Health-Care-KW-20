@@ -41,8 +41,9 @@ function Login({history}){
                }
             else{
             localStorage.setItem('info',JSON.stringify(data));
-            console.log(localStorage.getItem('info'));
+           // console.log(localStorage.getItem('info'));
             //Home
+            console.log('Login Success');
             history.push('/');
             }
             
