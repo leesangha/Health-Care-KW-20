@@ -15,9 +15,9 @@ app.get("/api/getUsername",(req,res,next) =>{
 });
 
 app.post("/addUser",(req,res,next) =>{
-    var address = req.body.address 
-    var password = req.body.password 
-    var name = req.body.name
+    const address = req.body.address;
+    const password = req.body.password;
+    const name = req.body.name;
 
     db.query("Select * from Member where Id = \'" + address
     + '\' AND Password = \'' + password + '\' AND Name = \'' + name + '\'',
@@ -52,8 +52,8 @@ app.post("/addUser",(req,res,next) =>{
 });
 
 app.post("/process/login",(req,res,next) => {
-    var id = req.body.id;
-    var password = req.body.password;
+    const id = req.body.id;
+    const password = req.body.password;
     db.query("Select * from Member where Id = \'" + id + '\'' + 'AND Password = \'' + password + '\'',
     (err,rows) =>{
         if(rows.recordset[0] ===undefined || err)
@@ -65,10 +65,9 @@ app.post("/process/login",(req,res,next) => {
        
     })
    
-})
+});
 
 app.post("/hate",(req,res,next) =>{
-
 
     db.query("read_user_preference'" + 1 + "','" + 1 + "'",(err,rows) =>{
         if(err)
@@ -79,7 +78,7 @@ app.post("/hate",(req,res,next) =>{
     });
     console.log('/hate route now sending file');
 
-    })
+    });
 app.use("/",router);
 
 app.listen(PORT,() =>{
