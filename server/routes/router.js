@@ -12,7 +12,8 @@ router.get("/api/isLogin",(req,res) =>{
         
         res.send({rs : rows[0].cnt});
     });
-})
+});
+
 router.get('/getData',(req,res) =>{
     db.query("select * from Member where name = 'sangha'",(err,rows) =>{
         if(!err) {
@@ -24,6 +25,6 @@ router.get('/getData',(req,res) =>{
             res.send(err);
         }
     })
-})
+});
 
 module.exports = router;
