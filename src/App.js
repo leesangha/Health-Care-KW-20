@@ -10,21 +10,23 @@ import AddButton from "./components/AddButton";
 function App() {
   
   const UserInfo = localStorage.getItem('info');
-
+  const [isLogin, setLog] = useState(false);
+  
   useEffect(() => {
-    if(UserInfo)
-    console.log(`로그인 완료 ${UserInfo}`);
+    if(UserInfo){
+      console.log(`로그인 완료 ${UserInfo}`);
+      console.log(isLogin);
+      console.log(isLogin);
+    }
     else 
     console.log('fail');
-
     //Login 검사 
-    //true => Sign in -> My page 
-    //false => return state;
+   
 
     //선호도 검사 
   },[])
   
-  const [isLogin, setLog] = useState(false);
+ 
 
   return (
     <>

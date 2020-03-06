@@ -1,7 +1,7 @@
 import React,{useState,useCallback} from 'react';
-function Login({history}){
+function Login({history,setLog}){
 
-
+    
     const [inputs,setInputs] = useState({
         id:'',
         password:''
@@ -44,6 +44,7 @@ function Login({history}){
            // console.log(localStorage.getItem('info'));
             //Home
             console.log('Login Success');
+            setLog(true);
             history.push('/');
             }
             
