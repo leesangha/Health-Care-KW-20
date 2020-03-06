@@ -4,24 +4,12 @@ import {faThumbsDown} from "@fortawesome/free-regular-svg-icons";
 import './Food.scss'
 
 function Food({imageSrc}) {
-  /* 미완성
-  useEffect(() => {
-    const foodContainers = document.getElementsByClassName("food");
-    const foodContainer = foodContainers[0];
-
-    for(let i = 0; i < foodContainers.length; i++) {
-      const image = foodContainers[i].querySelector("img");
-      // image.style.cssText += "width: " + foodContainer.offsetWidth + 'px';
-    }
-  });
-  */
-
   const [inputs, setInputs] = useState({
     user_id:'1',
     food_id:'1'
   });
 
-  const onClick = () =>{
+  const onClick = () => {
     console.log('click event ');
     //DB 선호도 내리기
     fetch('/hate',{method: 'POST', body:JSON.stringify(inputs),
