@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import './App.css';
@@ -8,16 +8,26 @@ import Home from "./routes/Home";
 import AddButton from "./components/AddButton";
 
 function App() {
+  const [isLogin, setLog] = useState(false);
+
   return (
-    <div>
-      <Header/>
+    <>
+      {isLogin ? (
+        <>
+          <Header />
+          <AddButton/>
+        </>
+      ) : null}
       <Switch>
-        <Route path = "/" component = {Home} exact/>
-        <Route path = "/SignUp" component ={SignUp}/>
-        <Route path = "/Login" component = {Login}/>
+        <Route exact path="/" render={
+          (props) => <Home {...props} isLogin={isLogin} />
+        } />
+        <Route path="/SignUp" component={SignUp}/>
+        <Route path="/Login" render={
+          (props) => <Login {...props} setLog={setLog} />
+        } />
       </Switch>
-      <AddButton/>
-    </div>
+    </>
   );
 }
 
