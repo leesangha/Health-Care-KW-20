@@ -6,8 +6,9 @@ function SignUp(){
         address:'',
         password:'',
         age: '',
+        sex:'',
     });
-    const {name, address,password,age} = inputs;
+    const {name, address,password,age,sex} = inputs;
 
     const onChange = useCallback(e=>{
         const {name,value} = e.target;
@@ -24,6 +25,7 @@ function SignUp(){
         address:'',
         password:'',
         age: '',
+        sex:'',
         })
     }
 
@@ -72,6 +74,13 @@ function SignUp(){
                     placeholder = "age"
                     onChange = {onChange}
                     value = {age}
+                    />
+                     <br/>
+                    <li>Sex</li>
+                    <input name = "sex"
+                    placeholder = "sex"
+                    onChange = {onChange}
+                    value = {sex}
                     />
                 </ul>
             </p>
