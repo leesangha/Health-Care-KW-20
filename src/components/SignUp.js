@@ -18,6 +18,8 @@ function SignUp(){
         });
     },[inputs]
     );
+    
+
 
     const isSuccess = () =>{
         setInputs({
@@ -42,6 +44,7 @@ function SignUp(){
             isSuccess();
         });
     }
+    
     return (
         <div>
             <p>회원가입 페이지 입니다.</p>

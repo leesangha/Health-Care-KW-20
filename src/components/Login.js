@@ -40,9 +40,9 @@ function Login({history,setLog}){
                 isSuccess();
                }
             else{
-            localStorage.setItem('info',JSON.stringify(data));
-           // console.log(localStorage.getItem('info'));
-            //Home
+            sessionStorage.setItem('info',JSON.stringify(data));
+            sessionStorage.setItem('isLogin',true);
+            //Go Home
             console.log('Login Success');
             setLog(true);
             history.push('/');
