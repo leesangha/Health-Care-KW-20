@@ -19,7 +19,7 @@ function App() {
     else 
     console.log('fail');
     //선호도 검사 
-
+    
   },[UserInfo])
   
  
