@@ -4,7 +4,7 @@ function getListShape(list) {
   return [list.length, list[0].length]
 }
 
-function recommend(preferenceList, userNumber) {
+function runRecommendationModel(preferenceList, userNumber) {
   const shape = getListShape(preferenceList);
 
   const options = {
@@ -26,4 +26,4 @@ function recommend(preferenceList, userNumber) {
     });
 }
 
-export default recommend;
+module.exports.recommend = runRecommendationModel;
