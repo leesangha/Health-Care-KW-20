@@ -12,16 +12,15 @@ function App() {
   const UserInfo = sessionStorage.getItem('info');
   const [isLogin, setLog] = useState(sessionStorage.getItem('isLogin'));
   useEffect(() => {
+    //Login 검사 
     if(UserInfo){
       console.log(`로그인 정보있음 ${UserInfo}`);
     }
     else 
     console.log('fail');
-    //Login 검사 
-   
-
     //선호도 검사 
-  },[])
+
+  },[UserInfo])
   
  
 

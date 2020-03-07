@@ -39,7 +39,7 @@ function Login({ history, setLog }){
                 isSuccess();
                }
             else{
-            sessionStorage.setItem('info',JSON.stringify(data));
+            sessionStorage.setItem('info',JSON.stringify(data.user));
             sessionStorage.setItem('isLogin',true);
             //Go Home
             console.log('Login Success');
