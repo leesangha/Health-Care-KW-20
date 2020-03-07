@@ -6,8 +6,9 @@ function SignUp(){
         address:'',
         password:'',
         age: '',
+        sex:'',
     });
-    const {name, address,password,age} = inputs;
+    const {name, address,password,age,sex} = inputs;
 
     const onChange = useCallback(e=>{
         const {name,value} = e.target;
@@ -17,19 +18,16 @@ function SignUp(){
         });
     },[inputs]
     );
+    
+
 
     const isSuccess = () =>{
-        //중복 확인
-
-        //성공
-
-
-        //실패
         setInputs({
         name:'',
         address:'',
         password:'',
         age: '',
+        sex:'',
         })
     }
 
@@ -42,12 +40,11 @@ function SignUp(){
         .then(res => res.json())
         .then(data => {
             console.log(data.text);
-            if(data.text != 'success')
+            if(data.text !== 'success')
             isSuccess();
         });
-       //DB 연결 send -> Insert 
-      // isSuccess();
     }
+    
     return (
         <div>
             <p>회원가입 페이지 입니다.</p>
@@ -80,6 +77,13 @@ function SignUp(){
                     placeholder = "age"
                     onChange = {onChange}
                     value = {age}
+                    />
+                     <br/>
+                    <li>Sex</li>
+                    <input name = "sex"
+                    placeholder = "sex"
+                    onChange = {onChange}
+                    value = {sex}
                     />
                 </ul>
             </p>

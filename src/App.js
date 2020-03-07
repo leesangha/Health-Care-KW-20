@@ -1,25 +1,48 @@
-import React from 'react';
-import SignUp from './SignUp';
-//import Home from './Home';
+import React, { useState,useEffect } from 'react';
+import SignUp from './components/SignUp';
+import Login from './components/Login';
 import './App.css';
-import { Route, Link, Switch } from 'react-router-dom';
-import NavigationBar from "./components/NavigationBar";
+import { Route, Switch } from 'react-router-dom';
+import Header from "./components/Header";
 import Home from "./routes/Home";
-
+import AddButton from "./components/AddButton";
 
 function App() {
+  
+  const UserInfo = sessionStorage.getItem('info');
+  const [isLogin, setLog] = useState(sessionStorage.getItem('isLogin'));
+  useEffect(() => {
+    //Login 검사 
+    if(UserInfo){
+      console.log(`로그인 정보있음 ${UserInfo}`);
+    }
+    else 
+    console.log('fail');
+    //선호도 검사 
+
+  },[UserInfo])
+  
+ 
+
   return (
-    <div>
-      <NavigationBar/>
+    <>
+      {isLogin ? (
+        <>
+          <Header />
+          <AddButton/>
+        </>
+      ) : null}
       <Switch>
-        <Route path = "/" component = {Home} exact/>
-        {/* <Route path = "/login" component = {Login}/> */}
-        <Route path = "/SignUp" component ={SignUp} />
+        <Route exact path="/" render={
+          (props) => <Home {...props} isLogin={isLogin} />
+        } />
+        <Route path="/SignUp" component={SignUp}/>
+        <Route path="/Login" render={
+          (props) => <Login {...props} setLog={setLog} />
+        } />
       </Switch>
-    </div>
+    </>
   );
 }
-
-
 
 export default App;
