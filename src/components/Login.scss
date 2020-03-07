@@ -1,0 +1,27 @@
+.login-page {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 1100px) {
+  .login-page {
+  }
+}
+
+.introduce {
+  background-color: rosybrown;
+}
+
+.login-container {
+  background-color: white;
+  grid-area: login;
+  width: 350px;
+  height: 380px;
+  border: solid 1px lightgray;
+  ul {
+    list-style-type: none;
+  }
+}
