@@ -6,7 +6,6 @@ import { Route, Switch } from 'react-router-dom';
 import Header from "./components/Header";
 import Home from "./routes/Home";
 import AddButton from "./components/AddButton";
-import recommend from "../server/recommendation-model/recommend";
 
 function App() {
   const UserInfo = sessionStorage.getItem('info');
@@ -20,9 +19,7 @@ function App() {
     console.log('fail');
     //선호도 검사 
 
-  },[UserInfo])
-  
- 
+  },[UserInfo]);
 
   return (
     <>
