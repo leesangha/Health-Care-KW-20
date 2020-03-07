@@ -15,11 +15,13 @@ function App() {
     //Login 검사 
     if(UserInfo){
       console.log(`로그인 정보있음 ${UserInfo}`);
+      const user_no = JSON.parse(UserInfo)[0].user_no;
+      console.log(user_no);
     }
     else 
     console.log('fail');
     //선호도 검사 
-    
+
   },[UserInfo])
   
  
@@ -38,7 +40,7 @@ function App() {
         } />
         <Route path="/SignUp" component={SignUp}/>
         <Route path="/Login" render={
-          (props) => <Login {...props} setLog={setLog} />
+          (props) => <Login {...props} setLog={setLog}/>
         } />
       </Switch>
     </>
