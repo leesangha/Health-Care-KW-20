@@ -48,15 +48,63 @@ app.post("/addUser",(req,res,next) => {
 app.post("/process/login",(req,res,next) => {
     const id = req.body.id;
     const password = req.body.password;
-    db.query("Select * from Member where Id = \'" + id + '\'' + 'AND Password = \'' + password + '\'',
-      (err,rows) => {
-          if(rows.recordset[0] ===undefined || err)
-              res.send({err:'error'});
-          else{
-              console.log(rows.recordset[0]);
-              res.send(rows.recordset[0]);
-          }
-      })
+    db.query("Select * from user_information where user_id = \'" + id + '\'' + 'AND user_password = \'' + password + '\'',
+    (err,rows) =>{
+        if(rows.recordset[0] ===undefined || err)
+        res.send({err:'error'});
+        else{
+          //console.log(rows.recordset[0]);
+          //res.send(rows.recordset[0]);
+      
+        db.query("select * from user_preference", (e,r) => {
+            if(r.recordset === undefined || e)
+            res.send({err:'error'});
+            else {
+                var max_user_no = 0;
+                var num = 0;
+                //유저수 체크 
+                while(true){
+                    try{
+                        var a = r.recordset[num]['음식_0'];
+                        num +=1;
+                    }
+                    catch(e){
+                        max_user_no = num;
+                        
+                        break;
+                    }
+                }
+                console.log(max_user_no);
+
+                const preference =
+                Array(max_user_no).fill(null).map(() => Array());
+                var i = 0;
+                while(true) {
+
+                    var u_no;
+                    try{
+                        for(var j = 0; j< 515; j++){
+                            u_no = i;
+                            preference[u_no][j] = 
+                            r.recordset[i]['음식_'+j];
+                        }
+                        i+=1;
+                    }
+                    catch(e){
+                        break;
+                    }
+                }
+                console.log(preference);
+                res.send({user:rows.recordsets[0],
+                    pref:preference
+                })
+            }
+        })
+        
+        }
+       
+    })
+   
 });
 
 app.post("/hate",(req,res,next) => {
