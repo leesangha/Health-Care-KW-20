@@ -1,29 +1,28 @@
 import React,{useState,useCallback} from 'react';
-function Login({history,setLog}){
 
-    
-    const [inputs,setInputs] = useState({
-        id:'',
-        password:''
-    });
-    const {id, password} = inputs;
-    
+function Login({ history, setLog }){
+  const [inputs,setInputs] = useState({
+    id:'',
+    password:''
+  });
+  const {id, password} = inputs;
 
-    const onChange = useCallback(e=>{
-        const {name,value} = e.target;
-        setInputs({
-            ...inputs,
-            [name]:value
-        });
+
+  const onChange = useCallback(e => {
+      const {name,value} = e.target;
+      setInputs({
+        ...inputs,
+        [name]:value
+      });
     },[inputs]
-    );
+  );
 
-    const isSuccess = () =>{
-        setInputs({
-        id:'',
-        password:''
-        })
-    }
+  const isSuccess = () => {
+    setInputs({
+      id:'',
+      password:''
+    })
+  };
 
     const onClick = ()=>{
         fetch('/process/login',{method: 'POST',body:JSON.stringify(inputs),

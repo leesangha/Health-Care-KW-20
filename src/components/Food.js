@@ -28,7 +28,7 @@ function Food({imageSrc}) {
       <div className="food">
         <img src={imageSrc} alt="foodImage"/>
         <button onClick={onClick}>
-          <FontAwesomeIcon size="3x" icon={faThumbsDown}/>
+          <FontAwesomeIcon size="2x" icon={faThumbsDown}/>
         </button>
       </div>
     </div>
