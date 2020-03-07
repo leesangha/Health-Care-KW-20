@@ -6,9 +6,9 @@ import { Route, Switch } from 'react-router-dom';
 import Header from "./components/Header";
 import Home from "./routes/Home";
 import AddButton from "./components/AddButton";
+import recommend from "./recommendation-model/recommend";
 
 function App() {
-  
   const UserInfo = sessionStorage.getItem('info');
   const [isLogin, setLog] = useState(sessionStorage.getItem('isLogin'));
   useEffect(() => {
@@ -18,12 +18,10 @@ function App() {
     else 
     console.log('fail');
     //Login 검사 
-   
 
-    //선호도 검사 
-  },[])
-  
- 
+    // 선호도 검사
+    // recommend();
+  },[UserInfo]);
 
   return (
     <>
