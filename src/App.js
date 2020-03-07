@@ -6,9 +6,9 @@ import { Route, Switch } from 'react-router-dom';
 import Header from "./components/Header";
 import Home from "./routes/Home";
 import AddButton from "./components/AddButton";
+import recommend from "../server/recommendation-model/recommend";
 
 function App() {
-  
   const UserInfo = sessionStorage.getItem('info');
   const [isLogin, setLog] = useState(sessionStorage.getItem('isLogin'));
   useEffect(() => {

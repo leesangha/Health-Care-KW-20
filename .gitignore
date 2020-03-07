@@ -29,4 +29,6 @@ yarn-error.log*
 .idea/workspace.xml
 server/recommendation-model/__pycache__/recommendation_model_np.cpython-37.pyc
 .idea/codeStyles/codeStyleConfig.xml
+.idea/codeStyles/codeStyleConfig.xml
+server/recommendation-model/__pycache__/recommendation_model_np.cpython-37.pyc
 .idea/other.xml
