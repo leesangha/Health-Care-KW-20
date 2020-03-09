@@ -52,19 +52,19 @@
     margin: 20px 0;
     align-items: center;
     color: rgba(0, 0, 0, 0.35);
-  }
-  .hr-sect::before,
-  .hr-sect::after {
-    content: "";
-    background: rgba(0, 0, 0, 0.35);
-    height: 1px;
-    flex-grow: 1;
-    line-height: 0;
-  }
 
-  .hr-sect::before { margin-right: 10px; }
-  .hr-sect::after  { margin-left: 10px; }
-
+    &::before,
+    &::after  {
+      content: "";
+      background: rgba(0, 0, 0, 0.35);
+      height: 1px;
+      flex-grow: 1;
+      line-height: 0;
+    }
+    .&::before { margin-right: 10px; }
+    .&::after  { margin-left: 10px; }
+  }
+  
   .signup-nav {
     height: auto;
     font-size: 14px;
