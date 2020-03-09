@@ -7,7 +7,7 @@ const db = require('./dbconnection');
 
 const app = express();
 app.use(express.json());
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4001;
 
 app.use(express.static(path.join(__dirname,'..','public/')));
 
@@ -45,7 +45,7 @@ app.post("/addUser",(req,res,next) => {
   )
 });
 
-app.post("/process/login",(req,res,next) => {
+app.post("/process/login", (req, res, next) => {
   const id = req.body.id;
   const password = req.body.password;
   db.query("Select * from user_information where user_id = \'" + id + '\'' + 'AND user_password = \'' + password + '\'',
@@ -53,7 +53,7 @@ app.post("/process/login",(req,res,next) => {
       if(rows.recordset[0] ===undefined || err)
         res.send({err:'error'});
       else {
-        db.query("select * from user_preference", (e,r) => {
+        db.query("select * from user_preference", async (e,r) => {
           if(r.recordset === undefined || e)
             res.send({err:'error'});
           else {
@@ -67,14 +67,12 @@ app.post("/process/login",(req,res,next) => {
               }
               catch(e){
                 max_user_no = num;
-
                 break;
               }
             }
             console.log(max_user_no);
 
-            const preference =
-              Array(max_user_no).fill(null).map(() => Array());
+            const preference = Array(max_user_no).fill(null).map(() => Array());
             let i = 0;
             while(true) {
               let u_no;
@@ -90,7 +88,8 @@ app.post("/process/login",(req,res,next) => {
                 break;
               }
             }
-            console.log(preference);
+            const predicted_preference = await recommend(preference, 3);
+            console.log(predicted_preference);
             res.send({user:rows.recordsets[0],
               pref:preference
             })

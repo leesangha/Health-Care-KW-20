@@ -15,15 +15,17 @@ function runRecommendationModel(preferenceList, userNumber) {
     args: [preferenceList, shape, userNumber]
   };
 
-  PythonShell.run('recommend_test01.py',
-    options, function(err, result) {
-      if(err) throw err;
+  return new Promise((resolve, reject) => {
+    let result_recommendation = [];
+    PythonShell.run('recommend_test01.py',
+      options, (err, result) => {
+        if(err) reject(err);
 
-      // result.forEach(v => console.log(v));
-      let result_recommendation = [];
-      result.forEach(v => result_recommendation.push(Number(v)));
-      console.log(result_recommendation);
-    });
+        // result.forEach(v => console.log(v));
+        result.forEach(v => result_recommendation.push(Number(v)));
+        resolve(result_recommendation);
+      });
+  });
 }
 
 module.exports.recommend = runRecommendationModel;
