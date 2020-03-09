@@ -61,10 +61,10 @@
       flex-grow: 1;
       line-height: 0;
     }
-    .&::before { margin-right: 10px; }
-    .&::after  { margin-left: 10px; }
+    &::before { margin-right: 10px; }
+    &::after  { margin-left: 10px; }
   }
-  
+
   .signup-nav {
     height: auto;
     font-size: 14px;
