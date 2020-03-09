@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useRef} from 'react';
+import React, {useState, useCallback, useRef, useEffect} from 'react';
 import './Login.scss';
 import {Link} from "react-router-dom";
 
@@ -57,6 +57,13 @@ function Login({ history, setLog }) {
   const idReference = useRef();
   const passwordReference = useRef();
   const buttonReference = useRef();
+
+  useEffect(() => {
+    const isLogin = sessionStorage.getItem('isLogin');
+    if(isLogin) {
+      history.push('/');
+    }
+  }, [history]);
 
   return (
     <div className='login-page'>
