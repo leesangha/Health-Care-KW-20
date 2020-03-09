@@ -7,7 +7,7 @@ const db = require('./dbconnection');
 
 const app = express();
 app.use(express.json());
-const PORT = process.env.PORT || 4001;
+const PORT = process.env.PORT || 4000;
 
 app.use(express.static(path.join(__dirname,'..','public/')));
 
@@ -88,8 +88,11 @@ app.post("/process/login", (req, res, next) => {
                 break;
               }
             }
+
+            // 선호도 모델 예측해서 변수에 담아놓은 부분
             const predicted_preference = await recommend(preference, 3);
             console.log(predicted_preference);
+
             res.send({user:rows.recordsets[0],
               pref:preference
             })
