@@ -8,12 +8,15 @@ import Home from "./routes/Home";
 import AddButton from "./components/AddButton";
 
 function App() {
+  
   const UserInfo = sessionStorage.getItem('info');
   const [isLogin, setLog] = useState(sessionStorage.getItem('isLogin'));
   useEffect(() => {
     //Login 검사 
     if(UserInfo){
       console.log(`로그인 정보있음 ${UserInfo}`);
+      const user_no = JSON.parse(UserInfo)[0].user_no;
+      console.log(user_no);
     }
     else 
     console.log('fail');
@@ -35,7 +38,7 @@ function App() {
         } />
         <Route path="/SignUp" component={SignUp}/>
         <Route path="/Login" render={
-          (props) => <Login {...props} setLog={setLog} />
+          (props) => <Login {...props} setLog={setLog}/>
         } />
       </Switch>
     </>
