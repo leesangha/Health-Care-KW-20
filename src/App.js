@@ -22,9 +22,7 @@ function App() {
     console.log('fail');
     //선호도 검사 
 
-  },[UserInfo])
-  
- 
+  },[UserInfo]);
 
   return (
     <>

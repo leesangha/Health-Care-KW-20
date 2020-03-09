@@ -1,3 +1,4 @@
+const  {recommend } = require("./recommendation-model/recommend");
 const express = require('express');
 const path = require('path');
 const os = require('os');
@@ -21,11 +22,10 @@ app.post("/addUser",(req,res,next) =>{
     db.query("Select * from user_information where user_id = \'" + address
     + '\' AND user_password = \'' + password + '\' AND user_name = \'' + name + '\'',
     (err, rows) => {
-        //Check User 
-        if(err)
-        console.log('AddUser error');       
-        else{
-
+      //Check User
+      if(err)
+        console.log('AddUser error');
+      else {
         if(rows.recordset[0] === undefined){
             //New User Insert
             db.query("register_user_information \'" + address + "\' \'" + password + "\' \'" + name + "\' \'" + age + "\' \'" + sex + "\'",
@@ -40,94 +40,92 @@ app.post("/addUser",(req,res,next) =>{
                 }
              
             });
-
         }
         else {
-            //Already User Inserted
-            res.send({text: 'Same User exists'});
+          //Already User Inserted
+          res.send({text: 'Same User exists'});
         }
-        }
+      }
     }
-)
-   
+  )
 });
 
-app.post("/process/login",(req,res,next) => {
-    const id = req.body.id;
-    const password = req.body.password;
-    db.query("Select * from user_information where user_id = \'" + id + '\'' + 'AND user_password = \'' + password + '\'',
-    (err,rows) =>{
-        if(rows.recordset[0] ===undefined || err)
+app.post("/process/login", (req, res, next) => {
+  const id = req.body.id;
+  const password = req.body.password;
+  db.query("Select * from user_information where user_id = \'" + id + '\'' + 'AND user_password = \'' + password + '\'',
+    (err,rows) => {
+      if(rows.recordset[0] ===undefined || err)
         res.send({err:'error'});
-        else{
-        const user_no = rows.recordset[0];
-        console.log(rows.recordset[0].user_no);
-        db.query("select * from user_preference", (e,r) => {
-            if(r.recordset === undefined || e)
+      else {
+        db.query("select * from user_preference", async (e,r) => {
+          if(r.recordset === undefined || e)
             res.send({err:'error'});
-            else {
-                var max_user_no = 0;
-                var num = 0;
-                //유저수 체크 
-                while(true){
-                    try{
-                        var a = r.recordset[num]['음식_0'];
-                        num +=1;
-                    }
-                    catch(e){
-                        max_user_no = num;
-                        
-                        break;
-                    }
-                }
-               
-
-                const preference =
-                Array(max_user_no).fill(null).map(() => Array());
-                var i = 0;
-                while(true) {
-
-                    var u_no;
-                    try{
-                        for(var j = 0; j< 515; j++){
-                            u_no = i;
-                            preference[u_no][j] = 
-                            r.recordset[i]['음식_'+j];
-                        }
-                        i+=1;
-                    }
-                    catch(e){
-                        break;
-                    }
-                }
-               // console.log(preference);
-                res.send({user:rows.recordsets[0],
-                    pref:preference
-                })
-
+          else {
+            let max_user_no = 0;
+            let num = 0;
+            //유저수 체크
+            while(true){
+              try{
+                const a = r.recordset[num]['음식_0'];
+                num +=1;
+              }
+              catch(e){
+                max_user_no = num;
+                break;
+              }
             }
+            console.log(max_user_no);
+
+            const preference = Array(max_user_no).fill(null).map(() => Array());
+            let i = 0;
+            while(true) {
+              let u_no;
+              try{
+                for(let j = 0; j< 515; j++){
+                  u_no = i;
+                  preference[u_no][j] =
+                    r.recordset[i]['음식_'+j];
+                }
+                i+=1;
+              }
+              catch(e){
+                break;
+              }
+            }
+
+            // 선호도 모델 예측해서 변수에 담아놓은 부분
+            let predicted_preference = await recommend(preference, 3);
+            predicted_preference = predicted_preference.map((item, index) => {
+              return {
+                "food_no": index,
+                "predicted_preference": item
+              }
+            });
+            console.log(predicted_preference);
+
+            res.send({user:rows.recordsets[0],
+              pref:preference
+            })
+          }
         })
-        
-        }
-       
+      }
     })
-   
 });
 
-app.post("/hate",(req,res,next) =>{
+app.post("/hate",(req,res,next) => {
+  db.query("read_user_preference'" + 1 + "','" + 1 + "'",(err,rows) =>{
+    if(err)
+      console.log('error');
+    else {
+      res.send(rows.recordsets);
+    }
+  });
+  console.log('/hate route now sending file');
 
-    db.query("read_user_preference'" + 1 + "','" + 1 + "'",(err,rows) =>{
-        if(err)
-        console.log('error');
-        else{
-        res.send(rows.recordsets);
-        }
-    });
-    console.log('/hate route now sending file');
-
-    });
+});
 app.use("/",router);
 
-app.listen(PORT,() =>{
-    console.log('Check out the app at https://localhost:' + PORT);
+app.listen(PORT,() => {
+  console.log('Check out the app at https://localhost:' + PORT);
 });
