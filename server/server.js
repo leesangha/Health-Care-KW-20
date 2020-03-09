@@ -124,6 +124,17 @@ app.post("/hate",(req,res,next) => {
   console.log('/hate route now sending file');
 
 });
+app.post("/getNutrition",(req,res,next) => {
+
+  db.query("read_user_nutrition'" +  1 + "'",(err,rows) =>{
+    if(err)
+      console.log('error');
+    else {
+      res.send(rows.recordsets);
+    }
+  });
+  res.send({text:'getNutriotion'});
+})
 app.use("/",router);
 
 app.listen(PORT,() => {
