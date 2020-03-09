@@ -15,9 +15,11 @@ app.post("/addUser",(req,res,next) =>{
     const address = req.body.address;
     const password = req.body.password;
     const name = req.body.name;
+    const age = req.body.age;
+    const sex = req.body.sex;
 
-    db.query("Select * from Member where Id = \'" + address
-    + '\' AND Password = \'' + password + '\' AND Name = \'' + name + '\'',
+    db.query("Select * from user_information where user_id = \'" + address
+    + '\' AND user_password = \'' + password + '\' AND user_name = \'' + name + '\'',
     (err, rows) => {
         //Check User 
         if(err)
@@ -26,11 +28,13 @@ app.post("/addUser",(req,res,next) =>{
 
         if(rows.recordset[0] === undefined){
             //New User Insert
-            db.query("Insert into Member \n" + "Values (" + '\'' +
-            address +'\','+'\'' +  password +'\','+  '\'' +name +'\'' + ')',
+            db.query("register_user_information \'" + address + "\' \'" + password + "\' \'" + name + "\' \'" + age + "\' \'" + sex + "\'",
             (err,rows) =>{
-                if(err)
-                console.log('Insert error');
+                if(err){
+                    console.log('insert error');
+                    console.log(address);
+                    console.log(password);
+                }
                 else {
                     res.send({text : 'success'});
                 }
@@ -56,9 +60,8 @@ app.post("/process/login",(req,res,next) => {
         if(rows.recordset[0] ===undefined || err)
         res.send({err:'error'});
         else{
-          //console.log(rows.recordset[0]);
-          //res.send(rows.recordset[0]);
-      
+        const user_no = rows.recordset[0];
+        console.log(rows.recordset[0].user_no);
         db.query("select * from user_preference", (e,r) => {
             if(r.recordset === undefined || e)
             res.send({err:'error'});
@@ -77,7 +80,7 @@ app.post("/process/login",(req,res,next) => {
                         break;
                     }
                 }
-                console.log(max_user_no);
+               
 
                 const preference =
                 Array(max_user_no).fill(null).map(() => Array());
@@ -97,10 +100,11 @@ app.post("/process/login",(req,res,next) => {
                         break;
                     }
                 }
-                console.log(preference);
+               // console.log(preference);
                 res.send({user:rows.recordsets[0],
                     pref:preference
                 })
+
             }
         })
         

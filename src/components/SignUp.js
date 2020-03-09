@@ -1,6 +1,6 @@
 import React,{useState,useCallback} from 'react';
 
-function SignUp(){
+function SignUp(history){
     const [inputs,setInputs] = useState({
         name:'',
         address:'',
@@ -42,6 +42,9 @@ function SignUp(){
             console.log(data.text);
             if(data.text !== 'success')
             isSuccess();
+            else {
+                history.push('/');
+            }
         });
     }
     
