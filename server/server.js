@@ -12,14 +12,14 @@ const PORT = process.env.PORT || 4000;
 app.use(express.static(path.join(__dirname,'..','public/')));
 
 
-app.post("/addUser",(req,res,next) =>{
-    const address = req.body.address;
-    const password = req.body.password;
-    const name = req.body.name;
-    const age = req.body.age;
-    const sex = req.body.sex;
+app.post("/addUser",(req,res,next) => {
+  const address = req.body.address;
+  const password = req.body.password;
+  const name = req.body.name;
+  const age = req.body.age;
+  const sex = req.body.sex;
 
-    db.query("Select * from user_information where user_id = \'" + address
+  db.query("Select * from user_information where user_id = \'" + address
     + '\' AND user_password = \'' + password + '\' AND user_name = \'' + name + '\'',
     (err, rows) => {
       //Check User
@@ -27,18 +27,18 @@ app.post("/addUser",(req,res,next) =>{
         console.log('AddUser error');
       else {
         if(rows.recordset[0] === undefined){
-            //New User Insert
-            db.query("register_user_information \'" + address + "\' \'" + password + "\' \'" + name + "\' \'" + age + "\' \'" + sex + "\'",
+          //New User Insert
+          db.query("register_user_information \'" + address + "\' \'" + password + "\' \'" + name + "\' \'" + age + "\' \'" + sex + "\'",
             (err,rows) =>{
-                if(err){
-                    console.log('insert error');
-                    console.log(address);
-                    console.log(password);
-                }
-                else {
-                    res.send({text : 'success'});
-                }
-             
+              if(err){
+                console.log('insert error');
+                console.log(address);
+                console.log(password);
+              }
+              else {
+                res.send({text : 'success'});
+              }
+
             });
         }
         else {
@@ -55,7 +55,7 @@ app.post("/process/login", (req, res, next) => {
   const password = req.body.password;
   db.query("Select * from user_information where user_id = \'" + id + '\'' + 'AND user_password = \'' + password + '\'',
     (err,rows) => {
-      if(rows.recordset[0] ===undefined || err)
+      if(rows.recordset[0] === undefined || err)
         res.send({err:'error'});
       else {
         db.query("select * from user_preference", async (e,r) => {
@@ -65,8 +65,8 @@ app.post("/process/login", (req, res, next) => {
             let max_user_no = 0;
             let num = 0;
             //유저수 체크
-            while(true){
-              try{
+            while(true) {
+              try {
                 const a = r.recordset[num]['음식_0'];
                 num +=1;
               }
