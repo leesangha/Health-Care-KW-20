@@ -28,12 +28,12 @@ app.post("/addUser",(req,res,next) =>{
       else {
         if(rows.recordset[0] === undefined){
             //New User Insert
-            db.query("register_user_information \'" + address + "\' \'" + password + "\' \'" + name + "\' \'" + age + "\' \'" + sex + "\'",
+            db.query("register_user_information \'" + address + "\', \'" + password + "\' ,\'" + name + "\', \'" + age + "\', \'" + sex + "\'",
             (err,rows) =>{
                 if(err){
                     console.log('insert error');
                     console.log(address);
-                    console.log(password);
+                    console.log(password + name + age + sex);
                 }
                 else {
                     res.send({text : 'success'});
@@ -114,9 +114,15 @@ app.post("/process/login", (req, res, next) => {
 });
 
 app.post("/hate",(req,res,next) => {
-  db.query("read_user_preference'" + 1 + "','" + 1 + "'",(err,rows) =>{
-    if(err)
-      console.log('error');
+
+    const user_id = req.body.user_id;
+    const food_id = req.body.food_id;
+
+  db.query("change_user_preference'" + user_id + "','" + food_id + "' , '" + 0 + "'",(err,rows) =>{
+    if(err){
+        console.log('error');
+        console.log(user_id);
+    }
     else {
       res.send(rows.recordsets);
     }
@@ -124,6 +130,10 @@ app.post("/hate",(req,res,next) => {
   console.log('/hate route now sending file');
 
 });
+app.post("/getNutrition",(req,res,next) => {
+    //db query 여기에 넣고 send로 객체형태로 보내셈
+    res.send({text:'getNutriotion'});
+})
 app.use("/",router);
 
 app.listen(PORT,() => {
