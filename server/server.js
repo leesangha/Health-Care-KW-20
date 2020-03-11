@@ -130,7 +130,7 @@ app.post("/getNutrition",(req,res,next) => {
     if(err)
       console.log('error');
     else {
-      res.send(rows.recordsets);
+      res.send(rows.recordsets[0][0]);
     }
   });
 })
@@ -141,7 +141,7 @@ app.post("/getIntake",(req,res,next) => {
     if(err)
       console.log('error');
     else {
-      res.send(rows.recordsets);
+      res.send(rows.recordsets[0][0]);
     }
   });
 })
