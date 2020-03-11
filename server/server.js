@@ -121,7 +121,7 @@ app.post("/hate",(req,res,next) => {
   db.query("change_user_preference'" + user_id + "','" + food_id + "' , '" + 0 + "'",(err,rows) =>{
     if(err){
         console.log('error');
-        console.log(user_id);
+        console.log('user_id :' + user_id);
     }
     else {
       res.send(rows.recordsets);
@@ -131,9 +131,29 @@ app.post("/hate",(req,res,next) => {
 
 });
 app.post("/getNutrition",(req,res,next) => {
-    //db query 여기에 넣고 send로 객체형태로 보내셈
-    res.send({text:'getNutriotion'});
+
+  db.query("read_user_nutrition'" +  1 + "'",(err,rows) =>{
+    if(err)
+      console.log('error');
+    else {
+      console.log(rows.recordset);
+      res.send(rows.recordsets);
+    }
+  });
+  
 })
+
+app.post("/getIntake",(req,res,next) => {
+
+  db.query("read_user_today_nutrition'" +  1 + "'",(err,rows) =>{
+    if(err)
+      console.log('error');
+    else {
+      res.send(rows.recordsets);
+    }
+  });
+})
+
 app.use("/",router);
 
 app.listen(PORT,() => {
