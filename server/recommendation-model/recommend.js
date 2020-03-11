@@ -6,7 +6,7 @@ function getListShape(list) {
 
 function runRecommendationModel(preferenceList, userNumber) {
   const shape = getListShape(preferenceList);
-  
+
   const options = {
     mode: 'text',
     pythonPath: 'C:/Users/sangh/Anaconda3/envs/tf1/python',
@@ -21,9 +21,11 @@ function runRecommendationModel(preferenceList, userNumber) {
       options, (err, result) => {
         if(err) reject(err);
 
-        // result.forEach(v => console.log(v));
+        console.log(result + '== result' );
+        //result.forEach(v => console.log(v));
         result.forEach(v => result_recommendation.push(Number(v)));
-        resolve(result_recommendation);
+         resolve(result_recommendation);
+        console.log(result_recommendation);
       });
   });
 }
