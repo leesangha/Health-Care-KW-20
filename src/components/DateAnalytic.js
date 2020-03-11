@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import './DateAnalytic.scss';
 
 // 사용자의 영양 권장량을 가져오는 함수
-function getNutritionRecommended() {
-  
+function GetNutritionRecommended() {
+  const [arr, setArr] = useState([]);
   fetch('/getNutrition',{method: 'POST', body:JSON.stringify(),
       headers:{
         "Content-Type":"application/json",
@@ -11,13 +11,14 @@ function getNutritionRecommended() {
       }})
       .then(res => res.json())
       .then(data => {
-       
+        setArr([data.권장열량,data.권장탄수화물,data.권장단백질,data.권장지방,data.권장당류,data.권장나트륨,data.권장콜레스테롤,data.권장포화지방산,data.권장트랜스지방산]);
       })
       return [];
     }
 
 // 사용자의 일일 영양 섭취량을 가져오는 함수
-function getNutritionIntake() {
+function GetNutritionIntake() {
+  const [arr, setArr] = useState([]);
   fetch('/getIntake',{method: 'POST', body:JSON.stringify(),
       headers:{
         "Content-Type":"application/json",
@@ -25,14 +26,14 @@ function getNutritionIntake() {
       }})
       .then(res => res.json())
       .then(data => {
-        console.log(data[0][0]);
+        setArr([data.열량,data.탄수화물,data.단백질,data.지방,data.당류,data.나트륨,data.콜레스테롤,data.포화지방산,data.트랜스지방산]);
       })
-  return [3000, 200, 97.5, 70, 600, 100, 160, 15, 1.23];
+  return arr;
 }
 
 function DateAnalytic() {
-  const recommended = getNutritionRecommended();
-  const intake = getNutritionIntake();
+  const recommended = GetNutritionRecommended();
+  const intake = GetNutritionIntake();
   const ratio = recommended.map((arg, index) =>
     arg !== 0 ? intake[index] / arg : 0
   );
