@@ -95,14 +95,14 @@ app.post("/process/login", (req, res, next) => {
             }
 
             // 선호도 모델 예측해서 변수에 담아놓은 부분
-            let predicted_preference = await recommend(preference, 3);
-            predicted_preference = predicted_preference.map((item, index) => {
-              return {
-                "food_no": index,
-                "predicted_preference": item
-              }
-            });
-            console.log(predicted_preference);
+            //let predicted_preference = await recommend(preference, 3);
+            //predicted_preference = predicted_preference.map((item, index) => {
+            //  return {
+            //    "food_no": index,
+            //    "predicted_preference": item
+            //  }
+            //});
+            //console.log(predicted_preference);
 
             res.send({user:rows.recordsets[0],
               pref:preference
@@ -135,6 +135,19 @@ app.post("/getNutrition",(req,res,next) => {
   });
   res.send({text:'getNutriotion'});
 })
+
+app.post("/getIntake",(req,res,next) => {
+
+  db.query("read_user_today_nutrition'" +  1 + "'",(err,rows) =>{
+    if(err)
+      console.log('error');
+    else {
+      res.send(rows.recordsets);
+    }
+  });
+  res.send({text:'getIntake'});
+})
+
 app.use("/",router);
 
 app.listen(PORT,() => {
