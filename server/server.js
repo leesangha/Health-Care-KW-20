@@ -133,7 +133,6 @@ app.post("/getNutrition",(req,res,next) => {
       res.send(rows.recordsets);
     }
   });
-  res.send({text:'getNutriotion'});
 })
 
 app.post("/getIntake",(req,res,next) => {
@@ -145,7 +144,6 @@ app.post("/getIntake",(req,res,next) => {
       res.send(rows.recordsets);
     }
   });
-  res.send({text:'getIntake'});
 })
 
 app.use("/",router);
