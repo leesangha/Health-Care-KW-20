@@ -37,13 +37,13 @@ function Login({ history, setLog }) {
       .then(res => res.json())
       .then(data => {
         //Login Fail
-        if(data.err ==='error')
-        {
+        if(data.err ==='error') {
           console.log('login fail');
           buttonReference.current.style.backgroundColor = "#CBE0F8";
+          errorMessage.current.innerHTML = "잘못된 비밀번호입니다. 다시 시도해주세요.";
+          console.log(errorMessage.current);
           isSuccess();
-        }
-        else {
+        } else {
           sessionStorage.setItem('info',JSON.stringify(data.user));
           sessionStorage.setItem('isLogin', true);
           //Go Home
@@ -51,12 +51,12 @@ function Login({ history, setLog }) {
           setLog(true);
           history.push('/');
         }
-
       });
   };
   const idReference = useRef();
   const passwordReference = useRef();
   const buttonReference = useRef();
+  const errorMessage = useRef();
 
   useEffect(() => {
     const isLogin = sessionStorage.getItem('isLogin');
@@ -83,6 +83,7 @@ function Login({ history, setLog }) {
                value={password}
                ref={passwordReference}
         />
+        <p className="error-message" ref={errorMessage} />
         <button onClick = {onClick} ref={buttonReference}>로그인</button>
         <div className="hr-sect">또는</div>
         <div className="signup-nav">
