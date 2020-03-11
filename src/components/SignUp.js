@@ -38,9 +38,11 @@ function SignUp({ history }){
       .then(res => res.json())
       .then(data => {
         console.log(data.text);
-        if(data.text !== 'success')
+        if(data.text !== 'success'){
           isSuccess();
-      });
+          history.push('/');
+        }
+        });
   };
 
   useEffect(() => {
