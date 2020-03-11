@@ -6,10 +6,10 @@ function getListShape(list) {
 
 function runRecommendationModel(preferenceList, userNumber) {
   const shape = getListShape(preferenceList);
-
+  
   const options = {
     mode: 'text',
-    pythonPath: 'C:/Users/dncks/Anaconda3/envs/tf1/python',
+    pythonPath: 'C:/Users/sangh/Anaconda3/envs/tf1/python',
     pythonOptions: ['-u'],
     scriptPath: __dirname,
     args: [preferenceList, shape, userNumber]
