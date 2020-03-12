@@ -3,7 +3,7 @@ import './DateAnalytic.scss';
 
 // 사용자의 영양 권장량을 가져오는 함수
 function GetNutritionRecommended() {
-  const [arr, setArr] = useState([]);
+  var arr = [];
   fetch('/getNutrition',{method: 'POST', body:JSON.stringify(),
       headers:{
         "Content-Type":"application/json",
@@ -11,14 +11,15 @@ function GetNutritionRecommended() {
       }})
       .then(res => res.json())
       .then(data => {
-        setArr([data.권장열량,data.권장탄수화물,data.권장단백질,data.권장지방,data.권장당류,data.권장나트륨,data.권장콜레스테롤,data.권장포화지방산,data.권장트랜스지방산]);
+        sessionStorage.setItem("recommended_nutrition",JSON.stringify(data));
       })
-      return arr;
+      arr = JSON.parse(sessionStorage.getItem("recommended_nutrition"));
+      return [arr.권장열량,arr.권장탄수화물,arr.권장단백질,arr.권장지방,arr.권장당류,arr.권장나트륨,arr.권장콜레스테롤,arr.권장포화지방산,arr.권장트랜스지방산];
     }
 
 // 사용자의 일일 영양 섭취량을 가져오는 함수
 function GetNutritionIntake() {
-  const [arr, setArr] = useState([]);
+  var arr = [];
   fetch('/getIntake',{method: 'POST', body:JSON.stringify(),
       headers:{
         "Content-Type":"application/json",
@@ -26,9 +27,10 @@ function GetNutritionIntake() {
       }})
       .then(res => res.json())
       .then(data => {
-        setArr([data.열량,data.탄수화물,data.단백질,data.지방,data.당류,data.나트륨,data.콜레스테롤,data.포화지방산,data.트랜스지방산]);
+        sessionStorage.setItem("intake_nutrition",JSON.stringify(data));
       })
-  return arr;
+      arr = JSON.parse(sessionStorage.getItem("intake_nutrition"));
+      return [arr.열량,arr.탄수화물,arr.단백질,arr.지방,arr.당류,arr.나트륨,arr.콜레스테롤,arr.포화지방산,arr.트랜스지방산];
 }
 
 function DateAnalytic() {
