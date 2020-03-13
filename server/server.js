@@ -114,14 +114,16 @@ app.post("/process/login", (req, res, next) => {
 });
 
 app.post("/hate",(req,res,next) => {
-  db.query("read_user_preference'" + 1 + "','" + 1 + "'",(err,rows) =>{
+  const user_id = req.body.user_id;
+  const food_no = req.body.food_no;
+  db.query("change_user_preference'" + user_id + "','" + food_no + "' , '" + 0 + "'",(err,rows) =>{
     if(err)
       console.log('error');
     else {
+      console.log(rows);
       res.send(rows.recordsets);
     }
   });
-  console.log('/hate route now sending file');
 
 });
 app.post("/getNutrition",(req,res,next) => {
