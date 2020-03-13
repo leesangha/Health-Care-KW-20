@@ -5,6 +5,7 @@ import './Food.scss'
 
 function Food({imageSrc, num}) {
   const food_no = imageSrc.split('.')[0].split('/')[2];
+  console.log('user no in food.js ' + num)
   const [inputs, setInputs] = useState({
     user_id:num,
     food_id:food_no
