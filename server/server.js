@@ -114,20 +114,16 @@ app.post("/process/login", (req, res, next) => {
 });
 
 app.post("/hate",(req,res,next) => {
-
-    const user_id = req.body.user_id;
-    const food_id = req.body.food_id;
-
-  db.query("change_user_preference'" + user_id + "','" + food_id + "' , '" + 0 + "'",(err,rows) =>{
-    if(err){
-        console.log('error');
-        console.log('user_id :' + user_id);
-    }
+  const user_id = req.body.user_id;
+  const food_no = req.body.food_no;
+  db.query("change_user_preference'" + user_id + "','" + food_no + "' , '" + 0 + "'",(err,rows) =>{
+    if(err)
+      console.log('error');
     else {
+      console.log(rows);
       res.send(rows.recordsets);
     }
   });
-  console.log('/hate route now sending file');
 
 });
 app.post("/getNutrition",(req,res,next) => {
@@ -136,11 +132,9 @@ app.post("/getNutrition",(req,res,next) => {
     if(err)
       console.log('error');
     else {
-      console.log(rows.recordset);
-      res.send(rows.recordsets);
+      res.send(rows.recordsets[0][0]);
     }
   });
-  
 })
 
 app.post("/getIntake",(req,res,next) => {
@@ -149,7 +143,7 @@ app.post("/getIntake",(req,res,next) => {
     if(err)
       console.log('error');
     else {
-      res.send(rows.recordsets);
+      res.send(rows.recordsets[0][0]);
     }
   });
 })
