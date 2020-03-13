@@ -1,6 +1,6 @@
 import React, {useState, useCallback, useRef, useEffect} from 'react';
 import './Login.scss';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Login({ history, setLog }) {
   const [inputs,setInputs] = useState({
@@ -9,15 +9,17 @@ function Login({ history, setLog }) {
   });
   const {id, password} = inputs;
 
+  const [isLoading, setLoad] = useState(false);
+
   const onChange = useCallback(e => {
       const {name,value} = e.target;
       setInputs({
         ...inputs,
         [name]:value
       });
-    if(idReference.current.value && passwordReference.current.value) {
-      buttonReference.current.style.backgroundColor = "#3797F0";
-    }
+      if(idReference.current.value && passwordReference.current.value) {
+        buttonReference.current.style.backgroundColor = "#3797F0";
+      }
     },[inputs]
   );
 
@@ -29,7 +31,8 @@ function Login({ history, setLog }) {
   };
 
   const onClick = () => {
-    fetch('/process/login',{method: 'POST',body:JSON.stringify(inputs),
+    setLoad(true);
+    fetch('/process/login',{method: 'POST', body:JSON.stringify(inputs),
       headers:{
         "Content-Type":"application/json",
         "Accept":"application/json"
@@ -38,13 +41,12 @@ function Login({ history, setLog }) {
       .then(data => {
         //Login Fail
         if(data.err ==='error') {
-          console.log('login fail');
+          setLoad(false);
           buttonReference.current.style.backgroundColor = "#CBE0F8";
           errorMessage.current.innerHTML = "잘못된 비밀번호입니다. 다시 시도해주세요.";
-          console.log(errorMessage.current);
           isSuccess();
         } else {
-          sessionStorage.setItem('info',JSON.stringify(data.user));
+          sessionStorage.setItem('info', JSON.stringify(data.user));
           sessionStorage.setItem('isLogin', true);
           //Go Home
           console.log('Login Success');
@@ -83,8 +85,8 @@ function Login({ history, setLog }) {
                value={password}
                ref={passwordReference}
         />
-        <p className="error-message" ref={errorMessage} />
-        <button onClick = {onClick} ref={buttonReference}>로그인</button>
+        <div className="error-message" ref={errorMessage} />
+        <button onClick = {onClick} ref={buttonReference}>{!isLoading ? "로그인" : <div className="loader" />}</button>
         <div className="hr-sect">또는</div>
         <div className="signup-nav">
           계정이 없으신가요?
