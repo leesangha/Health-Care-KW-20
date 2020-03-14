@@ -12,9 +12,11 @@
 
   .nutrition {
     padding-left: 20px;
+    height: 100%;
     width: 15%;
     list-style-type: none;
-
+    display: flex;
+    flex-direction: column;
     li {
       display: flex;
       align-items: center;
