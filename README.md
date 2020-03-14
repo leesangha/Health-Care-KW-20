@@ -17,11 +17,10 @@ Window: C:/Users/[YOURNAME]/anaconda3/envs/[DIRECTORY]/python
 해당 경로는 server.js 에서 options의 pythonPath로 설정해주어야합니다.
 
 #### VSCode 이용 시
-git bash 터미널 실행 후 .bashrc를 생성하고
+git bash 터미널 실행 후 .bashrc를 생성하고 아래 코드를 추가하고 저장해주세요.
 ```bash
 source ~/anaconda3/etc/profile.d/conda.sh
 ```
-위의 코드를 추가해주세요.
 
 #### 사용 방법
 `server/recommned.js` 에서 
