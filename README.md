@@ -24,14 +24,14 @@ source ~/anaconda3/etc/profile.d/conda.sh
 위의 코드를 추가해주세요.
 
 #### 사용 방법
-/server/recommned.js 에서 
+`server/recommned.js` 에서 
 > pythonPath: '/opt/anaconda3/envs/tf1/bin/python3'
 
 해당 부분을 위의 아나콘다 설치 경로로 수정해주세요.
 
 1. 로컬 서버 실행
 ```node
-node /server/server.js
+node server/server.js
 ```
 2. 리액트 앱 실행
 ```npm
