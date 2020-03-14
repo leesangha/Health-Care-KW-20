@@ -26,12 +26,15 @@ function App() {
 
   return (
     <>
-      {isLogin ? (
-        <>
-          <Header />
-          <AddButton/>
-        </>
-      ) : null}
+      {isLogin
+        ? (
+          <>
+            <Header />
+            <AddButton />
+          </>
+        )
+        : null
+      }
       <Switch>
         <Route exact path="/" render={
           (props) => <Home {...props} isLogin={isLogin} />
