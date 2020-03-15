@@ -11,7 +11,7 @@ function Recommendation({foodImageList}) {
       <h1>이런 음식 어때요?</h1>
       {foodImageList.map(imageSrc => {
         return (
-          <Food key={imageSrc} imageSrc={imageSrc} num = {user_no[0].user_no}/>
+          <Food key={imageSrc} imageSrc={imageSrc} num = {user_no}/>
         );
       })}
     </article>
