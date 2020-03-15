@@ -1,6 +1,7 @@
 import React from "react";
 import "./Recommendation.scss"
 import Food from "./Food";
+import { json } from "body-parser";
 
 function Recommendation({foodImageList}) {
   return (
