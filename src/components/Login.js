@@ -72,21 +72,28 @@ function Login({ history, setLog }) {
       <div className="introduce"></div>
       <div className="login-container">
         <img src="/images/maet-logo.png" alt="팀 로고" />
-        <input name="id"
-               placeholder="아이디"
-               onChange={onChange}
-               value={id}
-               ref={idReference}
+        <input
+          name="id"
+          placeholder="아이디"
+          onChange={onChange}
+          value={id}
+          ref={idReference}
         />
-        <input name="password"
-               placeholder="비밀번호"
-               type="password"
-               onChange={onChange}
-               value={password}
-               ref={passwordReference}
+        <input
+          name="password"
+          placeholder="비밀번호"
+          type="password"
+          onChange={onChange}
+          value={password}
+          ref={passwordReference}
         />
         <div className="error-message" ref={errorMessage} />
-        <button onClick = {onClick} ref={buttonReference}>{!isLoading ? "로그인" : <div className="loader" />}</button>
+        <button onClick = {onClick} ref={buttonReference}>
+          {!isLoading
+            ? "로그인"
+            : <div className="loader" />
+          }
+        </button>
         <div className="hr-sect">또는</div>
         <div className="signup-nav">
           계정이 없으신가요?

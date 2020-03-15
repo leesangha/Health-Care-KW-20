@@ -7,7 +7,7 @@ const db = require('./dbconnection');
 
 const app = express();
 app.use(express.json());
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4002;
 
 app.use(express.static(path.join(__dirname,'..','public/')));
 
@@ -27,18 +27,18 @@ app.post("/addUser",(req,res,next) => {
         console.log('AddUser error');
       else {
         if(rows.recordset[0] === undefined){
-            //New User Insert
-            db.query("register_user_information \'" + address + "\', \'" + password + "\' ,\'" + name + "\', \'" + age + "\', \'" + sex + "\'",
+          //New User Insert
+          db.query("register_user_information \'" + address + "\', \'" + password + "\' ,\'" + name + "\', \'" + age + "\', \'" + sex + "\'",
             (err,rows) =>{
-                if(err){
-                    console.log('insert error');
-                    console.log(address);
-                    console.log(password + name + age + sex);
-                }
-                else {
-                    res.send({text : 'success'});
-                }
-             
+              if(err){
+                console.log('insert error');
+                console.log(address);
+                console.log(password + name + age + sex);
+              }
+              else {
+                res.send({text : 'success'});
+              }
+
             });
         }
         else {
@@ -95,14 +95,14 @@ app.post("/process/login", (req, res, next) => {
             }
 
             // 선호도 모델 예측해서 변수에 담아놓은 부분
-            // let predicted_preference = await recommend(preference, 3);
-            // predicted_preference = predicted_preference.map((item, index) => {
-            //   return {
-            //     "food_no": index,
-            //     "predicted_preference": item
-            //   }
-            // });
-            // console.log(predicted_preference);
+            let predicted_preference = await recommend(preference, 3);
+            predicted_preference = predicted_preference.map((item, index) => {
+              return {
+                "food_no": index,
+                "predicted_preference": item
+              }
+            });
+            console.log(predicted_preference);
 
             res.send({user:rows.recordsets[0],
               pref:preference
@@ -115,13 +115,13 @@ app.post("/process/login", (req, res, next) => {
 
 app.post("/hate",(req,res,next) => {
 
-    const user_id = req.body.user_id;
-    const food_id = req.body.food_id;
+  const user_id = req.body.user_id;
+  const food_id = req.body.food_id;
 
   db.query("change_user_preference'" + user_id + "','" + food_id + "' , '" + 0 + "'",(err,rows) =>{
     if(err){
-        console.log('error');
-        console.log('user_id :' + user_id);
+      console.log('error');
+      console.log('user_id :' + user_id);
     }
     else {
       res.send(rows.recordsets);
@@ -130,28 +130,28 @@ app.post("/hate",(req,res,next) => {
   console.log('/hate route now sending file');
 
 });
-app.post("/getNutrition",(req,res,next) => {
+app.post("/getNutrition", (req,res,next) => {
 
-  db.query("read_user_nutrition'" +  1 + "'",(err,rows) =>{
+  db.query("read_user_nutrition'" +  1 + "'", (err,rows) => {
     if(err)
       console.log('error');
     else {
       res.send(rows.recordsets[0][0]);
     }
   });
-  
-})
+
+});
 
 app.post("/getIntake",(req,res,next) => {
 
-  db.query("read_user_today_nutrition'" +  1 + "'",(err,rows) =>{
+  db.query("read_user_today_nutrition'" +  1 + "'", (err,rows) =>{
     if(err)
       console.log('error');
     else {
       res.send(rows.recordsets[0][0]);
     }
   });
-})
+});
 
 app.use("/",router);
 
