@@ -11,7 +11,7 @@ function GetNutritionRecommended() {
     }})
     .then(res => res.json())
     .then(data => {
-     // setArr([data.권장열량,data.권장탄수화물,data.권장단백질,data.권장지방,data.권장당류,data.권장나트륨,data.권장콜레스테롤,data.권장포화지방산,data.권장트랜스지방산]);
+      setArr([data.권장열량,data.권장탄수화물,data.권장단백질,data.권장지방,data.권장당류,data.권장나트륨,data.권장콜레스테롤,data.권장포화지방산,data.권장트랜스지방산]);
     });
   return [];
 }
@@ -26,7 +26,7 @@ function GetNutritionIntake() {
     }})
     .then(res => res.json())
     .then(data => {
-     // setArr([data.열량,data.탄수화물,data.단백질,data.지방,data.당류,data.나트륨,data.콜레스테롤,data.포화지방산,data.트랜스지방산]);
+      setArr([data.열량,data.탄수화물,data.단백질,data.지방,data.당류,data.나트륨,data.콜레스테롤,data.포화지방산,data.트랜스지방산]);
     });
   return arr;
 }

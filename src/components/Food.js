@@ -3,11 +3,10 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faThumbsDown} from "@fortawesome/free-regular-svg-icons";
 import './Food.scss'
 
-function Food({imageSrc, num}) {
-  const food_no = imageSrc.split('.')[0].split('/')[2];
+function Food({imageSrc}) {
   const [inputs, setInputs] = useState({
-    user_id:num,
-    food_id:food_no
+    user_id:'1',
+    food_id:'1'
   });
 
   const onClick = () => {
