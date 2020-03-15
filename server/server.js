@@ -95,14 +95,14 @@ app.post("/process/login", (req, res, next) => {
             }
 
             // 선호도 모델 예측해서 변수에 담아놓은 부분
-            let predicted_preference = await recommend(preference, 3);
-            predicted_preference = predicted_preference.map((item, index) => {
-              return {
-                "food_no": index,
-                "predicted_preference": item
-              }
-            });
-            console.log(predicted_preference);
+            // let predicted_preference = await recommend(preference, 3);
+            // predicted_preference = predicted_preference.map((item, index) => {
+            //   return {
+            //     "food_no": index,
+            //     "predicted_preference": item
+            //   }
+            // });
+            // console.log(predicted_preference);
 
             res.send({user:rows.recordsets[0],
               pref:preference
@@ -115,12 +115,13 @@ app.post("/process/login", (req, res, next) => {
 
 app.post("/hate",(req,res,next) => {
   const user_id = req.body.user_id;
-  const food_no = req.body.food_no;
+  const food_no = req.body.food_id;
+  console.log(user_id+  '  ' + food_no)
   db.query("change_user_preference'" + user_id + "','" + food_no + "' , '" + 0 + "'",(err,rows) =>{
     if(err)
       console.log('error');
     else {
-      console.log(rows);
+      //console.log('success for hate');
       res.send(rows.recordsets);
     }
   });
