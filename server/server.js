@@ -75,7 +75,7 @@ app.post("/process/login", (req, res, next) => {
                 break;
               }
             }
-            console.log(max_user_no);
+            console.log('max_user의 수 ' + max_user_no);
 
             const preference = Array(max_user_no).fill(null).map(() => Array());
             let i = 0;
@@ -107,20 +107,17 @@ app.post("/process/login", (req, res, next) => {
 });
 
 app.post("/hate",(req,res,next) => {
-
   const user_id = req.body.user_id;
-  const food_id = req.body.food_id;
-
-  db.query("change_user_preference'" + user_id + "','" + food_id + "' , '" + 0 + "'",(err,rows) =>{
-    if(err){
+  const food_no = req.body.food_id;
+  console.log(user_id+  '  ' + food_no)
+  db.query("change_user_preference'" + user_id + "','" + food_no + "' , '" + 0 + "'",(err,rows) =>{
+    if(err)
       console.log('error');
-      console.log('user_id :' + user_id);
-    }
     else {
+      //console.log('success for hate');
       res.send(rows.recordsets);
     }
   });
-  console.log('/hate route now sending file');
 
 });
 app.post("/getNutrition", (req,res,next) => {
@@ -132,8 +129,7 @@ app.post("/getNutrition", (req,res,next) => {
       res.send(rows.recordsets[0][0]);
     }
   });
-
-});
+})
 
 app.post("/getIntake",(req,res,next) => {
 
