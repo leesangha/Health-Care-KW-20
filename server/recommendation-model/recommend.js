@@ -22,10 +22,9 @@ function runRecommendationModel(preferenceList, userNumber) {
         if(err) reject(err);
         if(result === undefined) reject(err);
 
-        console.log(result + '== result' );
         //result.forEach(v => console.log(v));
         result.forEach(v => result_recommendation.push(Number(v)));
-         resolve(result_recommendation);
+        resolve(result_recommendation);
         console.log(result_recommendation);
       });
   });
