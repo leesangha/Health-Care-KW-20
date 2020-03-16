@@ -29,7 +29,8 @@ source ~/anaconda3/etc/profile.d/conda.sh
 해당 부분을 위의 아나콘다 설치 경로로 수정해주세요.
 
 1. 로컬 서버 실행
-```node
+```shell
+conda activate base
 node server/server.js
 ```
 2. 리액트 앱 실행
