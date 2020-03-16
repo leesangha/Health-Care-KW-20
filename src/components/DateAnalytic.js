@@ -36,7 +36,10 @@ function getNutritionIntake() {
         "Accept":"application/json"
       }})
       .then(res => res.json())
-      .then(data => resolve(Object.values(data)))
+      .then(data => {
+        const values = Object.values(data);
+        resolve(values.map(v => Math.round(v * 100) / 100.0));
+      })
       .catch(err => reject(err));
   });
 }
