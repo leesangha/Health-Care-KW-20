@@ -6,8 +6,7 @@ import {faSmile} from "@fortawesome/free-regular-svg-icons";
 
 function Header() {
   const clearStorage = () => {
-    console.log();
-
+    sessionStorage.clear();
   };
   return (
     <header>
@@ -19,7 +18,9 @@ function Header() {
         <Link to="/statistics">통계</Link>
       </nav>
       <div className="right-side">
-        <FontAwesomeIcon icon={faSmile} onClick={clearStorage} />
+        <Link to="/login">
+          <FontAwesomeIcon icon={faSmile} onClick={clearStorage} />
+        </Link>
       </div>
     </header>
   );
