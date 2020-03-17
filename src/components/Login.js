@@ -8,8 +8,7 @@ function Login({ history, setLog }) {
     password:''
   });
   const {id, password} = inputs;
-
-  const [isLoading, setLoad] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   const onChange = useCallback(e => {
       const {name,value} = e.target;
@@ -31,7 +30,7 @@ function Login({ history, setLog }) {
   };
 
   const onClick = () => {
-    setLoad(true);
+    setLoading(true);
     fetch('/process/login',{method: 'POST', body:JSON.stringify(inputs),
       headers:{
         "Content-Type":"application/json",
@@ -41,18 +40,25 @@ function Login({ history, setLog }) {
       .then(data => {
         //Login Fail
         if(data.err ==='error') {
-          setLoad(false);
+          setLoading(false);
           buttonReference.current.style.backgroundColor = "#CBE0F8";
           errorMessage.current.innerHTML = "잘못된 비밀번호입니다. 다시 시도해주세요.";
           isSuccess();
         } else {
           sessionStorage.setItem('info', JSON.stringify(data.user));
-          sessionStorage.setItem('isLogin', true);
+          sessionStorage.setItem('isLogin', "true");
           //Go Home
           console.log('Login Success');
           setLog(true);
           history.push('/');
         }
+      })
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
+        buttonReference.current.style.backgroundColor = "#CBE0F8";
+        errorMessage.current.innerHTML = "서버 접속에 실패했습니다.";
+        isSuccess();
       });
   };
   const idReference = useRef();
@@ -61,7 +67,7 @@ function Login({ history, setLog }) {
   const errorMessage = useRef();
 
   useEffect(() => {
-    const isLogin = sessionStorage.getItem('isLogin');
+    const isLogin = Boolean(sessionStorage.getItem('isLogin'));
     if(isLogin) {
       history.push('/');
     }
