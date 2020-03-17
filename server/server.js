@@ -55,8 +55,10 @@ app.post("/process/login", (req, res, next) => {
   const password = req.body.password;
   db.query("Select * from user_information where user_id = \'" + id + '\'' + 'AND user_password = \'' + password + '\'',
     (err,rows) => {
-      if(rows.recordset[0] === undefined || err)
-        res.send({err:'error'});
+      if(rows === undefined)
+        res.send({err: 'error'});
+      else if(rows.recordset[0] === undefined || err)
+        res.send({err: 'error'});
       else {
         db.query("select * from user_preference", async (e,r) => {
           if(r.recordset === undefined || e)
