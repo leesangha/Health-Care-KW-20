@@ -11,16 +11,9 @@ function getFoodImage(foodArray) {
   return list;
 }
 
-function Recommendation() {
-  const UserInfo = sessionStorage.getItem('info');
+function Recommendation(user_no) {
   const foodImageList = getFoodImage();
 
-  const [user_no,setUser_no] = useState();
-
-  useEffect(() => {
-      setUser_no(JSON.parse(UserInfo)[0].user_no)
-    }
-  , [UserInfo]);
 
   return (
     <article className="recommendation">
