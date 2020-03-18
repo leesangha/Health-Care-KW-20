@@ -15,23 +15,15 @@ function getNutritionRecommended() {
           "Accept": "application/json"
         }
       })
-        .then(res => res.json())
-        .then(data => {
-          sessionStorage.setItem('recommended_nutrition', JSON.stringify(data));
-          resolve(Object.values(data));
-        })
-        .catch(error => reject(error));
-    })
-    : new Promise((resolve) => resolve(Object.values(JSON.parse(recommendedNutrition))));
-}
+      arr = JSON.parse(sessionStorage.getItem("recommended_nutrition"));
+      return [arr.권장열량,arr.권장탄수화물,arr.권장단백질,arr.권장지방,arr.권장당류,arr.권장나트륨,arr.권장콜레스테롤,arr.권장포화지방산,arr.권장트랜스지방산];
+  }
 
 // 사용자의 일일 영양 섭취량을 가져오는 함수
-function getNutritionIntake() {
-  return new Promise((resolve, reject) => {
-    fetch('/getIntake',{
-      method: 'POST',
-      body: JSON.stringify(),
-      headers:{
+function GetNutritionIntake() {
+  var arr = [];
+  fetch('/getIntake',{method: 'POST', body:JSON.stringify(),
+      headers:{ 
         "Content-Type":"application/json",
         "Accept":"application/json"
       }})
