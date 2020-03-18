@@ -7,6 +7,7 @@
 * python3
   * numpy
 
+#
 #### 아나콘다 이용 시
 아나콘다 설치 경로 내부의 파이썬 경로를 확인해야합니다.
 
@@ -37,6 +38,7 @@ source ~/anaconda3/etc/profile.d/conda.sh
 ```
 로컬 서버를 실행시킬 때, 아나콘다 가상 환경을 activate 시켜주세요.
 
+#
 #### 사용 방법
 `server/recommendation-model/recommned.js` 에서 
 > pythonPath: '/opt/anaconda3/envs/tf1/bin/python3'
