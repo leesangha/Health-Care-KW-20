@@ -43,7 +43,7 @@ source ~/anaconda3/etc/profile.d/conda.sh
 `server/recommendation-model/recommned.js` 에서 
 > pythonPath: '/opt/anaconda3/envs/tf1/bin/python3'
 
-해당 부분을 본인 컴퓨터의 파이썬 경로로 지정해주세요.
+해당 부분을 자신이 구축한 파이썬 경로로 지정해주세요.
 
 1. 로컬 서버 실행
 ```shell
