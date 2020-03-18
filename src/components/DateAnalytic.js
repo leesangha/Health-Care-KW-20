@@ -45,7 +45,6 @@ function getNutritionIntake() {
 }
 
 function DateAnalytic() {
-  const [recommended, setRecommendation] = useState([]);
   const [intake, setIntake] = useState([]);
   const [ratio, setRatio] = useState([]);
 
@@ -55,25 +54,20 @@ function DateAnalytic() {
     'cholesterol', 'saturated-fat', 'trans-fat'
   ];
 
-  const getData = useCallback(async () => {
-    try {
-      return await Promise.all([getNutritionRecommended(), getNutritionIntake()]);
-    } catch(err) {
-      console.error(err);
-    }
+  const fetchData = useCallback(async () => {
+    const [ recommendedNutrition, nutritionIntake ] = await Promise.all([getNutritionRecommended(), getNutritionIntake()]);
+    const _ratio = recommendedNutrition.map((arg, index) =>
+      arg !== 0
+        ? nutritionIntake[index] / arg
+        : 0
+    );
+    setIntake(nutritionIntake);
+    setRatio(_ratio);
   }, []);
 
-  getData()
-    .then(data => {
-      setRecommendation(data[0]);
-      setIntake(data[1]);
-      setRatio(recommended.map((arg, index) =>
-        arg !== 0
-          ? intake[index] / arg
-          : 0
-      ));
-    })
-    .catch(err => console.error(err));
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   useEffect(() => {
     const getElementsStyle = (nutritionArray) => {
