@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import './DateAnalytic.scss';
 
 // 사용자의 영양 권장량을 가져오는 함수
@@ -37,7 +37,6 @@ function GetNutritionIntake() {
 }
 
 function DateAnalytic() {
-  const [recommended, setRecommendation] = useState([]);
   const [intake, setIntake] = useState([]);
   const [ratio, setRatio] = useState([]);
 
@@ -47,28 +46,20 @@ function DateAnalytic() {
     'cholesterol', 'saturated-fat', 'trans-fat'
   ];
 
-  useEffect( () => {
-    async function getData() {
-      try {
-        const data = await Promise.all([getNutritionRecommended(), getNutritionIntake()]);
-        console.log(data);
-        return data;
-      } catch(err) {
-        console.error(err);
-      }
-    }
-    getData()
-      .then((data) => {
-        setRecommendation(data[0]);
-        setIntake(data[1]);
-        setRatio(recommended.map((arg, index) =>
-          arg !== 0
-            ? intake[index] / arg
-            : 0
-        ))
-      })
-      .catch(err => console.error(err));
+  const fetchData = useCallback(async () => {
+    const [ recommendedNutrition, nutritionIntake ] = await Promise.all([getNutritionRecommended(), getNutritionIntake()]);
+    const _ratio = recommendedNutrition.map((arg, index) =>
+      arg !== 0
+        ? nutritionIntake[index] / arg
+        : 0
+    );
+    setIntake(nutritionIntake);
+    setRatio(_ratio);
   }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   useEffect(() => {
     const getElementsStyle = (nutritionArray) => {
@@ -82,8 +73,6 @@ function DateAnalytic() {
 
   return (
     <article className="analytic">
-      {/*<h2>일일 섭취량</h2>*/}
-
       <ul className="nutrition">
         <li>열량</li>
         <li>탄수화물</li>
