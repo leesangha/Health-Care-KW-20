@@ -13,7 +13,7 @@
   .nutrition {
     padding-left: 20px;
     height: 100%;
-    width: 15%;
+    width: 100px;
     list-style-type: none;
     display: flex;
     flex-direction: column;
@@ -40,6 +40,7 @@
       display: flex;
       align-items: center;
       font-size: 12px;
+      padding-right: 10px;
       div {
         height: 25px;
         margin-right: 7px;
