@@ -8,12 +8,11 @@ import Home from "./routes/Home";
 function App() {
   const UserInfo = sessionStorage.getItem('info');
   const [isLogin, setLog] = useState(Boolean(sessionStorage.getItem('isLogin')));
-  const [user_no,setUser_no]=useState();
+
   useEffect(() => {
     if(UserInfo){
       console.log(`로그인 정보있음 ${UserInfo}`);
-      const num = JSON.parse(UserInfo)[0].user_no;
-      setUser_no(num);
+      const user_no = JSON.parse(UserInfo)[0].user_no;
       console.log(user_no);
     }
     else
@@ -26,7 +25,7 @@ function App() {
         <Route
           exact
           path="/"
-          render={(props) => <Home {...props} isLogin={isLogin} user_no={user_no} />}
+          render={(props) => <Home {...props} isLogin={isLogin} />}
         />
         <Route path="/SignUp" component={SignUp}/>
         <Route
