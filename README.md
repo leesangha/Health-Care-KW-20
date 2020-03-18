@@ -14,9 +14,8 @@
 
 일반적인 아나콘다 설치 경로는 다음과 같습니다.
 
-OSX `/opt/anaconda3/env/[DIRECTORY]/bin/python`
-
-Window `C:/Users/[YOURNAME]/anaconda3/envs/[DIRECTORY]/python`
+* OSX `/opt/anaconda3/env/[DIRECTORY]/bin/python`
+* Window `C:/Users/[YOURNAME]/anaconda3/envs/[DIRECTORY]/python`
 
 
 #### VSCode 이용 시
