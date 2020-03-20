@@ -15,12 +15,19 @@ function Recommendation() {
   const UserInfo = sessionStorage.getItem('info');
   const foodImageList = getFoodImage();
 
-  const [user_no,setUser_no] = useState();
+  const [user_no, setUser_no] = useState();
+  const [foodList, setFoodList] = useState(null);
 
   useEffect(() => {
       setUser_no(JSON.parse(UserInfo)[0].user_no)
     }
   , [UserInfo]);
+
+  useEffect(() => {
+    fetch('/getUserPreference', {method: "POST"})
+      .then(req => req.json())
+      .then(data => setFoodList(data));
+  }, []);
 
   return (
     <article className="recommendation">
