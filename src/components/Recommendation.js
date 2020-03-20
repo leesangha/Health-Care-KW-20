@@ -12,15 +12,17 @@ function getFoodImage(foodArray) {
 }
 
 function Recommendation() {
-  const UserInfo = sessionStorage.getItem('info');
   const foodImageList = getFoodImage();
-
-  const [user_no,setUser_no] = useState();
-
+  const [user_no, setUserNo] = useState();
+  const UserInfo = sessionStorage.getItem('info');
   useEffect(() => {
-      setUser_no(JSON.parse(UserInfo)[0].user_no)
+    if(UserInfo){
+      setUserNo(JSON.parse(UserInfo)[0].user_no);
+      //console.log('user_no: ' + user_no);
     }
-  , [UserInfo]);
+    else
+      console.log('fail');
+  },[user_no]);
 
   return (
     <article className="recommendation">
