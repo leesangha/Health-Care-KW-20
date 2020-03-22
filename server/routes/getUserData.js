@@ -42,6 +42,7 @@ function getUserPreference(req, res) {
       console.log('max_user의 수 ' + max_user_no);
 
       let preference = Array(max_user_no).fill(null).map(() => Array());
+      console.log(preference);
       let i = 0;
       while(true) {
         let u_no;
