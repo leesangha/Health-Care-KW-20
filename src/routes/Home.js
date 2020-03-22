@@ -5,7 +5,7 @@ import DateAnalytic from "../components/DateAnalytic";
 import Header from "../components/Header";
 import AddButton from "../components/AddButton";
 
-function Home({isLogin, user_no,history}) {
+function Home({isLogin, history}) {
   useEffect(() => {
     if(!isLogin) {
       history.push('/Login');
@@ -18,7 +18,7 @@ function Home({isLogin, user_no,history}) {
       <AddButton />
       <section>
         <DateAnalytic />
-        <Recommendation user_no={user_no}/>
+        <Recommendation />
       </section>
     </>
   );

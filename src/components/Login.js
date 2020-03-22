@@ -31,11 +31,15 @@ function Login({ history, setLog }) {
 
   const onClick = () => {
     setLoading(true);
-    fetch('/process/login',{method: 'POST', body:JSON.stringify(inputs),
-      headers:{
-        "Content-Type":"application/json",
-        "Accept":"application/json"
-      }})
+    fetch('/process/login',
+      {
+        method: 'POST',
+        body: JSON.stringify(inputs),
+        headers: {
+          "Content-Type":"application/json",
+          "Accept":"application/json"
+        }
+      })
       .then(res => res.json())
       .then(data => {
         //Login Fail
@@ -75,7 +79,7 @@ function Login({ history, setLog }) {
 
   return (
     <div className='login-page'>
-      <div className="introduce"></div>
+      <div className="introduce"/>
       <div className="login-container">
         <img src="/images/maet-logo.png" alt="팀 로고" />
         <input
