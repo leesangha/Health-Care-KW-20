@@ -9,7 +9,6 @@ function getNutritionRecommended() {
     ? new Promise((resolve, reject) => {
       fetch('/getNutrition', {
         method: 'POST',
-        body: JSON.stringify(),
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json"
@@ -30,7 +29,6 @@ function getNutritionIntake() {
   return new Promise((resolve, reject) => {
     fetch('/getIntake',{
       method: 'POST',
-      body: JSON.stringify(),
       headers:{
         "Content-Type":"application/json",
         "Accept":"application/json"

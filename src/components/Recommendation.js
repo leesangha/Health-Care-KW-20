@@ -13,8 +13,10 @@ function getFoodImage(foodArray) {
 
 function Recommendation() {
   const foodImageList = getFoodImage();
-  const [user_no, setUserNo] = useState();
-  const UserInfo = sessionStorage.getItem('info');
+
+  const [user_no, setUser_no] = useState();
+  const [foodList, setFoodList] = useState(null);
+
   useEffect(() => {
     if(UserInfo){
       setUserNo(JSON.parse(UserInfo)[0].user_no);
@@ -23,6 +25,12 @@ function Recommendation() {
     else
       console.log('fail');
   },[user_no]);
+
+  useEffect(() => {
+    fetch('/getUserPreference', {method: "POST"})
+      .then(req => req.json())
+      .then(data => setFoodList(data));
+  }, []);
 
   return (
     <article className="recommendation">
