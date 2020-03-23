@@ -5,6 +5,9 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSmile} from "@fortawesome/free-regular-svg-icons";
 
 function Header() {
+  const clearStorage = () => {
+    sessionStorage.clear();
+  };
   return (
     <header>
       <nav className="left-side">
@@ -15,7 +18,9 @@ function Header() {
         <Link to="/statistics">통계</Link>
       </nav>
       <div className="right-side">
-        <FontAwesomeIcon icon={faSmile} />
+        <Link to="/login">
+          <FontAwesomeIcon icon={faSmile} onClick={clearStorage} />
+        </Link>
       </div>
     </header>
   );

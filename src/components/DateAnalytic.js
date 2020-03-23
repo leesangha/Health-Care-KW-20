@@ -1,26 +1,71 @@
-import React, { useEffect } from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import './DateAnalytic.scss';
 
 // 사용자의 영양 권장량을 가져오는 함수
 function getNutritionRecommended() {
-  return [2600, 390.0, 97.5, 72.2, 520, 200, 300, 15, 2];
+  const recommendedNutrition = sessionStorage.getItem('recommended_nutrition');
+
+  return recommendedNutrition === null
+    ? new Promise((resolve, reject) => {
+      fetch('/getNutrition', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        }
+      })
+        .then(res => res.json())
+        .then(data => {
+          sessionStorage.setItem('recommended_nutrition', JSON.stringify(data));
+          resolve(Object.values(data));
+        })
+        .catch(error => reject(error));
+    })
+    : new Promise((resolve) => resolve(Object.values(JSON.parse(recommendedNutrition))));
 }
 
 // 사용자의 일일 영양 섭취량을 가져오는 함수
 function getNutritionIntake() {
-  return [3000, 200, 97.5, 70, 600, 100, 160, 15, 1.23];
+  return new Promise((resolve, reject) => {
+    fetch('/getIntake',{
+      method: 'POST',
+      headers:{
+        "Content-Type":"application/json",
+        "Accept":"application/json"
+      }})
+      .then(res => res.json())
+      .then(data => {
+        const values = Object.values(data);
+        resolve(values.map(v => Math.round(v * 100) / 100.0));
+      })
+      .catch(err => reject(err));
+  });
 }
 
 function DateAnalytic() {
-  const recommended = getNutritionRecommended();
-  const intake = getNutritionIntake();
-  const ratio = recommended.map((arg, index) =>
-    arg !== 0 ? intake[index] / arg : 0
-  );
+  const [intake, setIntake] = useState([]);
+  const [ratio, setRatio] = useState([]);
+
   const nutritionList = [
-    'calorie', 'carbohydrate', 'protein', 'fat', 'sugar', 'salt', 'cholesterol',
-    'saturated-fat', 'trans-fat'
+    'calorie', 'carbohydrate', 'protein',
+    'fat', 'sugar', 'salt',
+    'cholesterol', 'saturated-fat', 'trans-fat'
   ];
+
+  const fetchData = useCallback(async () => {
+    const [ recommendedNutrition, nutritionIntake ] = await Promise.all([getNutritionRecommended(), getNutritionIntake()]);
+    const _ratio = recommendedNutrition.map((arg, index) =>
+      arg !== 0
+        ? nutritionIntake[index] / arg
+        : 0
+    );
+    setIntake(nutritionIntake);
+    setRatio(_ratio);
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   useEffect(() => {
     const getElementsStyle = (nutritionArray) => {
@@ -34,8 +79,6 @@ function DateAnalytic() {
 
   return (
     <article className="analytic">
-      {/*<h2>일일 섭취량</h2>*/}
-
       <ul className="nutrition">
         <li>열량</li>
         <li>탄수화물</li>

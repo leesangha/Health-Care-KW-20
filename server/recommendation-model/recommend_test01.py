@@ -9,6 +9,7 @@ R = np.array(R, dtype=np.float32).reshape([shape[0], shape[1]])
 
 model = RM.RecommendModel(R)
 model.train()
+
 result = model.predict(int(sys.argv[3]))
 for num in result:
     print(num)

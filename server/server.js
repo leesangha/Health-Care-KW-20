@@ -1,137 +1,27 @@
-const  {recommend } = require("./recommendation-model/recommend");
 const express = require('express');
 const path = require('path');
-const os = require('os');
 const router = require('./routes/router');
-const db = require('./dbconnection');
+const loginRouter = require('./routes/login');
+const addUserRouter = require('./routes/addUser');
+const hateRouter = require('./routes/hate');
+const { getNutritionRouter, getIntakeRouter, getUserPreference } = require('./routes/getUserData');
 
 const app = express();
 app.use(express.json());
-const PORT = process.env.PORT || 4001;
+const PORT = process.env.PORT || 4002;
 
 app.use(express.static(path.join(__dirname,'..','public/')));
 
 
-app.post("/addUser",(req,res,next) => {
-    const address = req.body.address;
-    const password = req.body.password;
-    const name = req.body.name;
+app.post("/addUser", addUserRouter);
+app.post("/process/login", loginRouter);
+app.post("/hate", hateRouter);
+app.post("/getNutrition", getNutritionRouter);
+app.post("/getIntake", getIntakeRouter);
+app.post("/getUserPreference", getUserPreference);
 
-    db.query("Select * from Member where Id = \'" + address
-      + '\' AND Password = \'' + password + '\' AND Name = \'' + name + '\'',
-      (err, rows) => {
-          //Check User
-          if(err)
-              console.log('AddUser error');
-          else {
-              if(rows.recordset[0] === undefined){
-                  //New User Insert
-                  db.query("Insert into Member \n" + "Values (" + '\'' +
-                    address +'\','+'\'' +  password +'\','+  '\'' +name +'\'' + ')',
-                    (err,rows) =>{
-                        if(err)
-                            console.log('Insert error');
-                        else {
-                            res.send({text : 'success'});
-                        }
-                    });
-              }
-              else {
-                  //Already User Inserted
-                  res.send({text: 'Same User exists'});
-              }
-          }
-      }
-    )
-});
-
-app.post("/process/login",(req,res,next) => {
-    const id = req.body.id;
-    const password = req.body.password;
-    db.query("Select * from user_information where user_id = \'" + id + '\'' + 'AND user_password = \'' + password + '\'',
-    (err,rows) =>{
-        if(rows.recordset[0] ===undefined || err)
-        res.send({err:'error'});
-        else{
-          //console.log(rows.recordset[0]);
-          //res.send(rows.recordset[0]);
-      
-        db.query("select * from user_preference", (e,r) => {
-            if(r.recordset === undefined || e)
-            res.send({err:'error'});
-            else {
-                var max_user_no = 0;
-                var num = 0;
-                //유저수 체크 
-                while(true){
-                    try{
-                        var a = r.recordset[num]['음식_0'];
-                        num +=1;
-                    }
-                    catch(e){
-                        max_user_no = num;
-                        
-                        break;
-                    }
-                }
-                console.log(max_user_no);
-
-                const preference =
-                Array(max_user_no).fill(null).map(() => Array());
-                var i = 0;
-                while(true) {
-
-                    var u_no;
-                    try{
-                        for(var j = 0; j< 515; j++){
-                            u_no = i;
-                            preference[u_no][j] = 
-                            r.recordset[i]['음식_'+j];
-                        }
-                        i+=1;
-                    }
-                    catch(e){
-                        break;
-                    }
-                }
-                console.log(preference);
-                res.send({user:rows.recordsets[0],
-                    pref:preference
-                })
-            }
-        })
-        
-        }
-       
-    })
-   
-});
-
-app.post("/hate",(req,res,next) => {
-    db.query("read_user_preference'" + 1 + "','" + 1 + "'",(err,rows) =>{
-        if(err)
-            console.log('error');
-        else {
-            res.send(rows.recordsets);
-        }
-    });
-    console.log('/hate route now sending file');
-
-});
 app.use("/",router);
 
 app.listen(PORT,() => {
-    console.log('Check out the app at https://localhost:' + PORT);
+  console.log('Check out the app at https://localhost:' + PORT);
 });
-
-const list = [[0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 0, 0, 1, 0, 4, 0],
-    [0, 3, 4, 0, 3, 0, 0, 2, 2, 0, 0],
-    [0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 5, 0, 0, 5, 0],
-    [0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 5],
-    [0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4],
-    [0, 0, 0, 0, 0, 0, 5, 0, 0, 5, 0],
-    [0, 0, 0, 3, 0, 0, 0, 0, 4, 5, 0]];
-recommend(list, 3);
