@@ -3,10 +3,9 @@ import './AddButton.scss'
 
 // href 추가되야함.
 function AddButton() {
-
   const onClick = () =>{
       console.log('onClick');
-  }
+  };
   return (
     <div className="add-button">
       <a className="float" id="menu-share">
@@ -14,7 +13,7 @@ function AddButton() {
       </a>
       <ul>
         <li>
-          <a>
+          <a href="/register">
             <i className="fa fa-camera my-float" onClick = {onClick}/>
           </a>
         </li>
