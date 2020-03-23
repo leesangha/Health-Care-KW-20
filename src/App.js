@@ -4,6 +4,7 @@ import Login from './components/Login';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import Home from "./routes/Home";
+import Register from './routes/Register'
 
 function App() {
   const UserInfo = sessionStorage.getItem('info');
@@ -32,6 +33,7 @@ function App() {
           path="/Login"
           render={(props) => <Login {...props} setLog={setLog}/>}
         />
+        <Route path="/register" component={Register} />
       </Switch>
     </>
   );
