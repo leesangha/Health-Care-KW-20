@@ -13,7 +13,7 @@ function Food({imageSrc, num}) {
   });
 
   const onClick = () => {
-    console.log('click event ' + num + ' ' + food_no);
+    console.log('click event ' + food_no);
     setInputs({
       user_id:num,
       food_id:food_no
