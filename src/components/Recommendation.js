@@ -12,29 +12,25 @@ function getFoodImage(foodArray) {
 }
 
 function Recommendation() {
-  const UserInfo = sessionStorage.getItem('info');
   const foodImageList = getFoodImage();
-
-  const [user_no, setUser_no] = useState();
-  const [foodList, setFoodList] = useState(null);
-
+  const [user_no, setUserNo] = useState();
+  const UserInfo = sessionStorage.getItem('info');
   useEffect(() => {
-      setUser_no(JSON.parse(UserInfo)[0].user_no)
+    if(UserInfo){
+      setUserNo(JSON.parse(UserInfo)[0].user_no);
     }
-  , [UserInfo]);
-
-  useEffect(() => {
-    fetch('/getUserPreference', {method: "POST"})
-      .then(req => req.json())
-      .then(data => setFoodList(data));
-  }, []);
+    else
+      console.log('fail');
+  },[user_no]);
 
   return (
     <article className="recommendation">
       <h1>이런 음식 어때요?</h1>
-      {foodImageList.map(imageSrc => (
-        <Food key={imageSrc} imageSrc={imageSrc} num={user_no}/>
-      ))}
+      {foodImageList.map(imageSrc => {
+        return (
+          <Food key={imageSrc} imageSrc={imageSrc} num = {user_no}/>
+        );
+      })}
     </article>
   );
 }
