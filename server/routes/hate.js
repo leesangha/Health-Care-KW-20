@@ -1,6 +1,8 @@
+const express = require('express');
+const router = express.Router();
 const db = require('../dbconnection');
 
-module.exports = function hateRouter(req, res) {
+router.post('/', (req, res) => {
   const user_id = req.body.user_id;
   const food_no = req.body.food_id;
   console.log(user_id+  '  ' + food_no);
@@ -12,4 +14,6 @@ module.exports = function hateRouter(req, res) {
       res.send(rows.recordsets);
     }
   });
-};
+});
+
+module.exports = router;
