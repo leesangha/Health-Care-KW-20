@@ -5,19 +5,10 @@ import Food from "./Food";
 function getFoodImage(foodArray) {
   // 서버에서 이미지를 가져오는 부분
   let list = [
-    '/images/0.jpeg', "/images/1.jpg", "/images/2.jpg", "/images/3.jpg",
-    '/images/4.jpg', "/images/5.jpg", '/images/6.jpg'
+    '/images/food/0.jpeg', "/images/food/1.jpg", "/images/food/2.jpg", "/images/food/3.jpg",
+    '/images/food/4.jpg', "/images/food/5.jpg", '/images/food/6.jpg'
   ];
-  //서버로 요청 
-  fetch('/getImageList',{method: 'POST', body:JSON.stringify({}),
-  headers:{
-    "Content-Type":"application/json",
-    "Accept":"application/json"
-  }})
-  .then(res => res.json())
-  .then(data => {
-   
-  })
+  
 
   return list;
 }

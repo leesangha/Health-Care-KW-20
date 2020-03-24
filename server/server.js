@@ -4,8 +4,7 @@ const router = require('./routes/router');
 const loginRouter = require('./routes/login');
 const addUserRouter = require('./routes/addUser');
 const hateRouter = require('./routes/hate');
-const { getNutritionRouter, getIntakeRouter, getUserPreference } = require('./routes/getUserData');
-
+const { getNutritionRouter, getIntakeRouter, getUserPreference ,getImageList} = require('./routes/getUserData');
 const app = express();
 app.use(express.json());
 const PORT = process.env.PORT || 4002;
@@ -19,6 +18,7 @@ app.post("/hate", hateRouter);
 app.post("/getNutrition", getNutritionRouter);
 app.post("/getIntake", getIntakeRouter);
 app.post("/getUserPreference", getUserPreference);
+app.post("/getImageList",getImageList);
 
 app.use("/",router);
 

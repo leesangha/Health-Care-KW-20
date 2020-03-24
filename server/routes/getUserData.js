@@ -1,5 +1,6 @@
 const db = require('../dbconnection');
 const { predictPreference } = require('../predictPreference');
+const fs = require('fs');
 
 function getNutritionRouter(req, res) {
   db.query("read_user_nutrition'" +  1 + "'", (err,rows) => {
@@ -42,9 +43,20 @@ function getUserPreference(req, res) {
     }
   })
 }
+function getImageList(req,res){
+  const path = __dirname.split('server')[0] + 'public\\images\\food';
+  fs.readdir(path,(err,items)=>{
+    for (var i=0; i<items.length; i++) {
+      var file = path + '\\' + items[i];
+      console.log("Start: " + file);
+    }
+  })
+  res.send({data: path});
+}
 
 module.exports = {
   getNutritionRouter: getNutritionRouter,
   getIntakeRouter: getIntakeRouter,
-  getUserPreference: getUserPreference
+  getUserPreference: getUserPreference,
+  getImageList: getImageList
 };
