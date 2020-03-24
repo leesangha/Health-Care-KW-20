@@ -7,19 +7,11 @@ function Food({imageSrc, num}) {
   const food_no = imageSrc.split('.')[0].split('/')[2];
 
   //console.log('user no in food.js ' + num)
-  const [inputs, setInputs] = useState({
-    user_id:num,
-    food_id:food_no
-  });
-
   const onClick = () => {
     console.log('click event ' + num  + ' ' + food_no);
-    setInputs({
-      user_id:num,
-      food_id:food_no
-    });
+   
     //DB 선호도 내리기
-    fetch('/hate',{method: 'POST', body:JSON.stringify(inputs),
+    fetch('/hate',{method: 'POST', body:JSON.stringify({user_id : num, food_id : food_no}),
       headers:{
         "Content-Type":"application/json",
         "Accept":"application/json"

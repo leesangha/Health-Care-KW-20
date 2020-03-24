@@ -12,7 +12,7 @@ function Header() {
     <header>
       <nav className="left-side">
         <Link to="/">
-          <img src="../images/maet-logo.png" alt="logo" />
+          <img src="../images/deco/maet-logo.png" alt="logo" />
         </Link>
         <Link to="/register">등록</Link>
         <Link to="/statistics">통계</Link>

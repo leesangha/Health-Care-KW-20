@@ -8,6 +8,17 @@ function getFoodImage(foodArray) {
     '/images/0.jpeg', "/images/1.jpg", "/images/2.jpg", "/images/3.jpg",
     '/images/4.jpg', "/images/5.jpg", '/images/6.jpg'
   ];
+  //서버로 요청 
+  fetch('/getImageList',{method: 'POST', body:JSON.stringify({}),
+  headers:{
+    "Content-Type":"application/json",
+    "Accept":"application/json"
+  }})
+  .then(res => res.json())
+  .then(data => {
+   
+  })
+
   return list;
 }
 

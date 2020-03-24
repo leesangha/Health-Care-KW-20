@@ -8,7 +8,6 @@ module.exports = function hateRouter(req, res) {
     if(err)
       console.log('error');
     else {
-      //console.log('success for hate');
       res.send(rows.recordsets);
     }
   });

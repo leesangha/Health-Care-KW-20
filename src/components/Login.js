@@ -81,7 +81,7 @@ function Login({ history, setLog }) {
     <div className='login-page'>
       <div className="introduce"/>
       <div className="login-container">
-        <img src="/images/maet-logo.png" alt="팀 로고" />
+        <img src="/images/deco/maet-logo.png" alt="팀 로고" />
         <input
           name="id"
           placeholder="아이디"
