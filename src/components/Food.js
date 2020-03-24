@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faThumbsDown} from "@fortawesome/free-regular-svg-icons";
 import './Food.scss'
 
 function Food({imageSrc, num}) {
-  const food_no = imageSrc.split('.')[0].split('/')[2];
+  const food_no = imageSrc.split('.')[0].split('/')[3];
 
   //console.log('user no in food.js ' + num)
   const onClick = () => {

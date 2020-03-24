@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import "./Home.scss"
 import Recommendation from "../components/Recommendation";
 import DateAnalytic from "../components/DateAnalytic";
@@ -10,17 +10,18 @@ function Home({isLogin, history}) {
     if(!isLogin) {
       history.push('/Login');
     }
-    //배열 요청 
-    fetch('/getImageList',{method: 'POST', body:JSON.stringify({}),
-    headers:{
-      "Content-Type":"application/json",
-      "Accept":"application/json"
-    }})
-    .then(res => res.json())
-    .then(data => {
-     console.log(data);
-    })
+     //배열 요청 
+  fetch('/getImageList',{method: 'POST', body:JSON.stringify({}),
+  headers:{
+    "Content-Type":"application/json",
+    "Accept":"application/json"
+  }})
+  .then(res => res.json())
+  .then(data => {
+   console.log(data);
+  })
   });
+ 
 
   return (
     <>

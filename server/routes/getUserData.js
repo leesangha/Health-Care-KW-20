@@ -44,14 +44,19 @@ function getUserPreference(req, res) {
   })
 }
 function getImageList(req,res){
-  const path = __dirname.split('server')[0] + 'public\\images\\food';
+  const path = __dirname.split('server')[0] + 'public/images/food';
+  const list = [];
   fs.readdir(path,(err,items)=>{
     for (var i=0; i<items.length; i++) {
-      var file = path + '\\' + items[i];
-      console.log("Start: " + file);
+      const file = (path + '/' + items[i]).split('public')[1];
+      list.push(`${file}`);
+      //console.log("Start: " + file);
+      
     }
+    console.log(list);
+    res.send(list);
   })
-  res.send({data: path});
+
 }
 
 module.exports = {
