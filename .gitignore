@@ -24,3 +24,4 @@ yarn-error.log*
 server/recommendation-model/__pycache__/recommendation_model_np.cpython-37.pyc
 *.xml
 .idea/maet-project.iml
+*.png
