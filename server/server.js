@@ -18,10 +18,10 @@ app.use("/addUser", addUserRouter);
 app.use("/process/login", loginRouter);
 app.use("/hate", hateRouter);
 app.use("/userData", userDataRouter);
-app.use("/upload", uploadRouter);
+app.use("/uploads", uploadRouter);
 
 app.use("/", router);
 
-app.listen(PORT,() => {
+app.listen(PORT, () => {
   console.log('Check out the app at https://localhost:' + PORT);
 });
