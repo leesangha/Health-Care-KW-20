@@ -24,6 +24,8 @@ router.post('/intake', (req, res) => {
 });
 
 router.post('/preference', (req, res) => {
+  const userNumber = req.body.userNumber;
+
   db.query("select * from user_preference", async (err, rows) => {
     const usersPreferences = rows.recordset;
 
@@ -39,7 +41,7 @@ router.post('/preference', (req, res) => {
       });
 
       // 선호도 모델 계산되고 정렬되어 반환됨.
-      preference = await predictPreference(preference);
+      preference = await predictPreference(preference, userNumber);
       res.send({pref: preference})
     }
   })
