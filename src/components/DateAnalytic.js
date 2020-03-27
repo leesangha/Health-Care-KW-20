@@ -7,7 +7,7 @@ function getNutritionRecommended() {
 
   return recommendedNutrition === null
     ? new Promise((resolve, reject) => {
-      fetch('/getNutrition', {
+      fetch('/userData/nutrition', {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
@@ -27,7 +27,7 @@ function getNutritionRecommended() {
 // 사용자의 일일 영양 섭취량을 가져오는 함수
 function getNutritionIntake() {
   return new Promise((resolve, reject) => {
-    fetch('/getIntake',{
+    fetch('/userData/intake',{
       method: 'POST',
       headers:{
         "Content-Type":"application/json",

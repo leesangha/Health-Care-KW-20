@@ -19,11 +19,15 @@ function Food({imageSrc, num}) {
       food_id:food_no
     });
     //DB 선호도 내리기
-    fetch('/hate',{method: 'POST', body:JSON.stringify(inputs),
-      headers:{
-        "Content-Type":"application/json",
-        "Accept":"application/json"
-      }})
+    fetch('/hate',
+      {
+        method: 'POST',
+        body:JSON.stringify(inputs),
+        headers: {
+          "Content-Type":"application/json",
+          "Accept":"application/json"
+        }
+      })
       .then(res => res.json())
       .then(data => {
         console.log('선호도 내림 ')

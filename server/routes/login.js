@@ -1,6 +1,8 @@
+const express = require('express');
+const router = express.Router();
 const db = require('../dbconnection');
 
-module.exports = function loginRouter(req, res) {
+router.post('/', (req, res) => {
   const id = req.body.id;
   const password = req.body.password;
   db.query("Select * from user_information where user_id = \'" + id + '\'' + 'AND user_password = \'' + password + '\'',
@@ -9,6 +11,10 @@ module.exports = function loginRouter(req, res) {
         res.send({err: 'error'});
       else if(rows.recordset[0] === undefined || err)
         res.send({err: 'error'});
-      else res.send({user: rows.recordsets[0]});
-    })
-};
+      else {
+        res.send({user: rows.recordsets[0]});
+      }
+    });
+});
+
+module.exports = router;

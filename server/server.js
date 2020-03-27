@@ -4,24 +4,24 @@ const router = require('./routes/router');
 const loginRouter = require('./routes/login');
 const addUserRouter = require('./routes/addUser');
 const hateRouter = require('./routes/hate');
-const { getNutritionRouter, getIntakeRouter, getUserPreference } = require('./routes/getUserData');
+const userDataRouter = require('./routes/userData');
+const uploadRouter = require('./routes/uploads');
 
 const app = express();
 app.use(express.json());
 const PORT = process.env.PORT || 4002;
 
-app.use(express.static(path.join(__dirname,'..','public/')));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'uploads')));
 
+app.use("/addUser", addUserRouter);
+app.use("/process/login", loginRouter);
+app.use("/hate", hateRouter);
+app.use("/userData", userDataRouter);
+app.use("/uploads", uploadRouter);
 
-app.post("/addUser", addUserRouter);
-app.post("/process/login", loginRouter);
-app.post("/hate", hateRouter);
-app.post("/getNutrition", getNutritionRouter);
-app.post("/getIntake", getIntakeRouter);
-app.post("/getUserPreference", getUserPreference);
+app.use("/", router);
 
-app.use("/",router);
-
-app.listen(PORT,() => {
+app.listen(PORT, () => {
   console.log('Check out the app at https://localhost:' + PORT);
 });

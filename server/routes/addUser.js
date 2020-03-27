@@ -1,6 +1,8 @@
+const express = require('express');
+const router = express.Router();
 const db = require('../dbconnection');
 
-module.exports = function addUserRouter(req, res) {
+router.use(function addUserRouter(req, res) {
   const address = req.body.address;
   const password = req.body.password;
   const name = req.body.name;
@@ -36,4 +38,6 @@ module.exports = function addUserRouter(req, res) {
       }
     }
   )
-};
+});
+
+module.exports = router;
