@@ -2,19 +2,19 @@ import React, { useEffect,useState } from "react";
 import "./Recommendation.scss"
 import Food from "./Food";
 
-function getFoodImage(list) {
+function getFoodImage() {
   // 서버에서 이미지를 가져오는 부분
   let l = [
     '/images/food/0.jpeg', "/images/food/1.jpg", "/images/food/2.jpg", "/images/food/3.jpg",
     '/images/food/4.jpg', "/images/food/5.jpg", '/images/food/6.jpg'
   ];
-  
 
-  return list;
+
+  return l;
 }
 
-function Recommendation(list) {
-  const foodImageList = getFoodImage(list);
+function Recommendation() {
+  const foodImageList = getFoodImage();
   const [user_no, setUserNo] = useState();
   const UserInfo = sessionStorage.getItem('info');
   useEffect(() => {
