@@ -8,6 +8,12 @@ const router = express.Router();
 const storage = multer.diskStorage({
   destination: (req, res, callback) => {
     console.log(req.body.img);
+
+    const uploadsPath = path.resolve('server', 'uploads');
+    if(!fs.existsSync(uploadsPath)) {
+      fs.mkdirSync(uploadsPath);
+    }
+
     const id = req.body.id;
     const userDir = path.resolve('server', 'uploads', id);
 
