@@ -21,10 +21,11 @@ function getFoodImage(foodList) {
 
 function Recommendation() {
   const [foodList, setFoodList] = useState(null);
-
+  const [userNumber, setUser_no] = useState(null);
+  const userInfo = JSON.parse(sessionStorage.getItem('info'));
   useEffect(() => {
-    const userInfo = JSON.parse(sessionStorage.getItem('info'));
-    const userNumber = userInfo[0].user_no;
+    if(userInfo)
+      setUser_no(userInfo[0].user_no);
 
     fetch('/userData/preference', {
         method: "POST",
