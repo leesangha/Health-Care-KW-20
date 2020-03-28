@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faThumbsDown} from "@fortawesome/free-regular-svg-icons";
+import {faTired} from "@fortawesome/free-regular-svg-icons";
 import './Food.scss'
 
 function Food({imageSrc, num}) {
@@ -39,7 +39,7 @@ function Food({imageSrc, num}) {
       <div className="food">
         <img src={imageSrc} alt="foodImage"/>
         <button onClick={onClick}>
-          <FontAwesomeIcon size="2x" icon={faThumbsDown}/>
+          <FontAwesomeIcon size="2x" color="rgb(30, 31, 42)" icon={faTired}/>
         </button>
       </div>
     </div>
