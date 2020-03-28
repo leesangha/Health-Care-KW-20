@@ -49,7 +49,7 @@ function Recommendation() {
     <article className="recommendation">
       <h1>이런 음식 어때요? </h1>
       {foodImageList.map(imageSrc => (
-        <Food key={imageSrc} imageSrc={imageSrc}/>
+        <Food key={imageSrc} imageSrc={imageSrc} />
       ))}
     </article>
   );
