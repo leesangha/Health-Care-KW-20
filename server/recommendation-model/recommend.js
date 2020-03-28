@@ -19,13 +19,12 @@ function runRecommendationModel(preferenceList, userNumber) {
     let result_recommendation = [];
     PythonShell.run('recommend_test01.py',
       options, (err, result) => {
-        if(err) reject(err);
-        if(result === undefined) reject(err);
-
-        //result.forEach(v => console.log(v));
-        result.forEach(v => result_recommendation.push(Number(v)));
-        resolve(result_recommendation);
-        console.log(result_recommendation);
+        if(err || result === undefined)
+          reject(err);
+        else
+          result.forEach(v => result_recommendation.push(Number(v)));
+          resolve(result_recommendation);
+          console.log(result_recommendation);
       });
   });
 }
