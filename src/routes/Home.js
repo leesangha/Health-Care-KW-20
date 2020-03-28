@@ -19,10 +19,8 @@ function Home({isLogin, history}) {
    }})
    .then(res => res.json())
    .then(data => {
-    console.log(data);
     setList(data);
   });
-  console.log(list);
   },[]);
  
 
