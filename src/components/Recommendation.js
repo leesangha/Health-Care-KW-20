@@ -1,6 +1,7 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Recommendation.scss"
 import Food from "./Food";
+import {PacmanLoader} from "react-spinners";
 
 function getFoodImage(foodArray) {
   // 서버에서 이미지를 가져오는 부분
@@ -12,28 +13,43 @@ function getFoodImage(foodArray) {
 }
 
 function Recommendation() {
-  const UserInfo = sessionStorage.getItem('info');
   const foodImageList = getFoodImage();
-
-  const [user_no, setUser_no] = useState();
   const [foodList, setFoodList] = useState(null);
 
   useEffect(() => {
-      setUser_no(JSON.parse(UserInfo)[0].user_no)
-    }
-  , [UserInfo]);
+    const userInfo = JSON.parse(sessionStorage.getItem('info'));
+    const userNumber = userInfo[0].user_no;
+    console.log(userNumber);
 
-  useEffect(() => {
-    fetch('/getUserPreference', {method: "POST"})
+    fetch('/userData/preference', {
+        method: "POST",
+        body: JSON.stringify({userNumber: userNumber}),
+        headers: {
+          "Content-Type":"application/json",
+          "Accept":"application/json"
+        }
+      }
+    )
       .then(req => req.json())
-      .then(data => setFoodList(data));
+      .then(data => {
+        const predictedFoodList = data.pref.map(obj => obj.food_no);
+        setFoodList(predictedFoodList);
+      });
   }, []);
 
-  return (
+
+  return foodList === null ? (
+    <div className="loader">
+      <PacmanLoader
+        size={20}
+        color={'#646464'}
+      />
+    </div>
+  ) : (
     <article className="recommendation">
-      <h1>이런 음식 어때요?</h1>
+      <h1>이런 음식 어때요? </h1>
       {foodImageList.map(imageSrc => (
-        <Food key={imageSrc} imageSrc={imageSrc} num={user_no}/>
+        <Food key={imageSrc} imageSrc={imageSrc}/>
       ))}
     </article>
   );
