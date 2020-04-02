@@ -6,7 +6,7 @@ function SignUp({ history }){
     address:'',
     password:'',
     age: '',
-    sex:'',
+    sex:'남',
   });
   const {name, address,password,age,sex} = inputs;
 
@@ -25,7 +25,7 @@ function SignUp({ history }){
       address:'',
       password:'',
       age: '',
-      sex:'',
+      sex:'남',
     })
   };
 
@@ -87,11 +87,13 @@ function SignUp({ history }){
           />
           <br/>
           <li>Sex</li>
-          <input name = "sex"
-                 placeholder = "sex"
-                 onChange = {onChange}
-                 value = {sex}
-          />
+          <select name = "sex" 
+          onChange={onChange}
+          value={sex}>
+            <option value="남" selected>남자</option>
+            <option value="여">여자</option>
+          </select>
+          
         </ul>
       </p>
       <button onClick = {onClick} > 제출</button>
