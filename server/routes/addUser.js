@@ -7,7 +7,7 @@ module.exports = function addUserRouter(req, res) {
   const age = req.body.age;
   const sex = req.body.sex;
  
-  db.query(`Select * from user_information where user_id ='${address}' AND user_password='${password}' AND user_name ='${name}'`,
+  db.query(`Select * from user_information where user_id ='${address}' AND user_password='${password}'`,
     (err, rows) => {
       //Check User
       if(err)
@@ -15,7 +15,7 @@ module.exports = function addUserRouter(req, res) {
       else {
         if(rows.recordset[0] === undefined){
           //New User Insert
-          db.query(`register_user_information '${address}','${password}','${name}','${age}','${sex}'`,
+          db.query(`register_user_information '${address}' , '${password}' , '${name}' , '${age}' , '${sex}'`,
             (err,rows) =>{
               if(err){
                 console.log('insert error');

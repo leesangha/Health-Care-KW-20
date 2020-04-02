@@ -40,9 +40,11 @@ function SignUp({ history }){
         console.log(data.text);
         if(data.text !== 'success'){
           isSuccess();
-          history.push('/');
         }
-        });
+        else{
+          history.push('/Research');
+        }
+       });
   };
 
   useEffect(() => {

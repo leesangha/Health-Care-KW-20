@@ -5,6 +5,7 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import Home from "./routes/Home";
 import Register from './routes/Register'
+import Research from './components/Research';
 
 function App() {
   const [isLogin, setLog] = useState(Boolean(sessionStorage.getItem('isLogin')));
@@ -19,6 +20,7 @@ function App() {
           render={(props) => <Home {...props} isLogin={isLogin} />}
         />
         <Route path="/SignUp" component={SignUp}/>
+        <Route path="/Research" component={Research}/>
         <Route
           path="/Login"
           render={(props) => <Login {...props} setLog={setLog}/>}

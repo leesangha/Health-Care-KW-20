@@ -3,7 +3,6 @@ import "./Recommendation.scss"
 import Food from "./Food";
 
 function Recommendation({list}) {
-  // const foodImageList =list;
   const [user_no, setUserNo] = useState();
   const UserInfo = sessionStorage.getItem('info');
   useEffect(() => {
